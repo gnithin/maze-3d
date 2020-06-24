@@ -2,6 +2,9 @@
 
 ## Edit this line: Put your link to your youtube video here (see deliverables).
 
+## Edit this line: Put a few screenshots of your project here (see deliverables).
+
+
 * Name and partners name(At most teams of 2 folks total)
   * Team member 1: *edit this*
   * Team member 2: *edit this*
@@ -24,7 +27,7 @@
     </tr>
     <tr>
       <td>(33.3%) Project Completion</td>
-     <td align="left"><ul><li>Does the project compile and run.</li><li>Is it polished without any bugs (No weird visual artifacts).</li><li>Did you make a video?</li></ul></td>
+     <td align="left"><ul><li>Does the project compile and run.</li><li>Is it polished without any bugs (No weird visual artifacts).</li><li>Did you make a video?</li><li>Did you add a screenshot of your project to the repository?</li></ul></td>
     </tr>
     <tr>
       <td>(33.3%) Technical</td>
