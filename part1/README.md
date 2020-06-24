@@ -1,5 +1,6 @@
 # Final Project - Computer Graphics
 
+<img src="./media/header.jpg">
 
 ## Description
 
