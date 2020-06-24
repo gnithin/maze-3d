@@ -53,14 +53,14 @@ My suggested strategy for this project is to:
 * You will have plenty of time to think about the project you want to deliver, but get started early.
 * I recommend finding at least one web tutorial, youtube talk, etc. that can serve as a reference for you to fall back on.
 * You can get feedback from me ahead of time on nearly any graphics related topic, do so!
-* Find your teammates(teams of up to 3) early if you choose to work in a team!
+* Find your teammates(teams of up to 2) early if you choose to work in a team!
   * Piazza is a good resource, and I will tentatively match folks on a spreadsheet.
   
 ### How to run your final project
 
-Use the `build.py`. You can modify build.py to your needs, but I should be able to type `python build.py` and then run the generated executable. I plan to spend 0 time figuring out what dependencies to download. If there is some setup extraneous setup needed to run your project, we should arrange to demonstrate your project during office hours.
+Use a [build.py](./build.py). You can modify [build.py](./build.py) to your needs, but I should be able to type `python build.py` and then run the generated executable. I plan to spend 0 time figuring out what dependencies to download. If there is some setup extraneous setup needed to run your project, we should arrange to demonstrate your project during office hours. 
 
-Pretend you are deploying this software to someone who has no idea what your code does and needs to be able to run it. The only assumption you should make is the user has SDL2 setup and perhaps a web browser.
+Pretend you are deploying this software to someone who has no idea what your code does and needs to be able to run it. The only assumption you should make is the user has SDL2 setup and perhaps a web browser. Logistically, using the [build.py](./build.py) that we have used in this course makes it possible for myself and the course staff to run and debug your project.
 
 ### Video Deliverable
 
@@ -78,7 +78,7 @@ Videos may publicly be uploaded to the course websites 'hall of fame'--please ke
 
 #### Sample Video Deliverable
 
-Here is a sample from previous years:
+Here is a sample from previous years and what I like about it:
 
 - https://youtu.be/cGB8C6IT8eE
   - I like this sample because:
@@ -106,6 +106,6 @@ Here is a sample from previous years:
 - A: Yes under the following conditions
   - You acknowledge your team members and any third parties fairly for their contributions.
   - You remove the README.md provided with the assignment (delete it entirely from your github history), as you'll want your own readme anyway.
-- Q: May I have a team of 4--I really want 4 team members?
-- A: No. I recommend a team size of 1-2.
+- Q: May I have a team of 3 or 4--I really want 3 or 4 team members?
+- A: No. I recommend a team size of 1-2. This project can be completed as a 1 person project.
 
