@@ -14,7 +14,8 @@
 #include <string>
 #include <glad/glad.h>
 
-class Texture{
+class Texture
+{
 public:
     // Constructor
     Texture();
@@ -25,19 +26,17 @@ public:
     // slot tells us which slot we want to bind to.
     // We can have multiple slots. By default, we
     // will set our slot to 0 if it is not specified.
-    void Bind(unsigned int slot=0) const;
+    void Bind(unsigned int slot = 0) const;
     // Be done with our texture
     void Unbind();
+
 private:
     // Store a unique ID for the texture
     GLuint m_TextureID;
     // Filepath to the image loaded
     std::string m_filepath;
     // PPM Image
-    Image* m_image;
-
+    Image *m_image;
 };
-
-
 
 #endif

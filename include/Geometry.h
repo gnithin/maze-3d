@@ -13,30 +13,31 @@
 #include <vector>
 
 // Purpose of this class is to store vertice and triangle information
-class Geometry{
+class Geometry
+{
 public:
 	// Constructor
 	Geometry();
 	// Destructor
 	~Geometry();
-	
+
 	// Functions for working with individual vertices
 	unsigned int getSizeInBytes();
 	unsigned int getSize();
-	float* getData();
+	float *getData();
 	// Manually push back data
 	void addVertex(float x, float y, float z);
-	void addTexture(float s, float t);	
-    // gen pushes all attributes into a single vector
+	void addTexture(float s, float t);
+	// gen pushes all attributes into a single vector
 	void gen();
 	// Functions for working with Indices
 	// Creates a triangle from 3 indicies
 	// When a triangle is made, the tangents and bi-tangents are also
 	// computed
-	void makeTriangle(unsigned int vert0, unsigned int vert1, unsigned int vert2);  
+	void makeTriangle(unsigned int vert0, unsigned int vert1, unsigned int vert2);
 
 	unsigned int getIndicesSize();
-	unsigned int* getIndicesData();
+	unsigned int *getIndicesData();
 
 private:
 	// All data stores all of the vertexPositons, coordinates, normals, etc.
@@ -53,9 +54,5 @@ private:
 	// The indices for a indexed-triangle mesh
 	std::vector<unsigned int> indices;
 };
-
-
-
-
 
 #endif

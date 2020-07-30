@@ -15,9 +15,9 @@
 
 // The purpose of this class is to store
 // transformations of 3D entities (cameras, objects, etc.)
-class Transform{
+class Transform
+{
 public:
-
     Transform();
 
     ~Transform();
@@ -31,27 +31,26 @@ public:
     // Perform rotation about an axis
     void scale(float x, float y, float z);
     // Returns the transformation matrix
-    GLfloat* getTransformMatrix();
+    GLfloat *getTransformMatrix();
     // Apply Transform
     // Takes in a transform and sets internal
     // matrix.
     void applyTransform(Transform t);
     // Returns the transformation matrix
     glm::mat4 getInternalMatrix() const;
-	// Transform multiplicaiton
-	Transform& operator*=(const Transform& t);
-	// Transform addition
-	Transform& operator+=(const Transform& t);
-	// Transform =
-	Transform& operator=(const Transform& t);
+    // Transform multiplicaiton
+    Transform &operator*=(const Transform &t);
+    // Transform addition
+    Transform &operator+=(const Transform &t);
+    // Transform =
+    Transform &operator=(const Transform &t);
     // Multiplication
-    friend Transform operator*(const Transform& lhs, const Transform& rhs);
+    friend Transform operator*(const Transform &lhs, const Transform &rhs);
     // Addition
-    friend Transform operator+(const Transform& lhs, const Transform& rhs);
+    friend Transform operator+(const Transform &lhs, const Transform &rhs);
 
 private:
     glm::mat4 modelTransformMatrix;
 };
-
 
 #endif

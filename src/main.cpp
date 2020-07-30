@@ -5,16 +5,9 @@
 // Functionality that we created
 #include "SDLGraphicsProgram.h"
 
-int main(int argc, char** argv){
-
-   
-
-	std::cout << "Beginning Intitialization\n";
-	// Create an instance of an object for a SDLGraphicsProgram
-	SDLGraphicsProgram mySDLGraphicsProgram(1280,720);
-	// Run our program forever
+int main(int argc, char **argv)
+{
+	SDLGraphicsProgram mySDLGraphicsProgram(1280, 720);
 	mySDLGraphicsProgram.loop();
-	// When our program ends, it will exit scope, the
-	// destructor will then be called and clean up the program.
 	return 0;
 }

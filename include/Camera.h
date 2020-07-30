@@ -13,12 +13,13 @@
 
 #include "glm/glm.hpp"
 
-class Camera{
+class Camera
+{
 public:
-	// Singleton pattern for having one single camera.
-	static Camera& instance();
+    // Singleton pattern for having one single camera.
+    static Camera &instance();
 
-	// Constructor
+    // Constructor
     Camera();
     // Return a 'view' matrix with our
     // camera transformation applied.
@@ -40,6 +41,7 @@ public:
     float getViewXDirection();
     float getViewYDirection();
     float getViewZDirection();
+
 private:
     // Track the old mouse position
     glm::vec2 oldMousePosition;
@@ -53,8 +55,5 @@ private:
     // with modifying this value.
     glm::vec3 upVector;
 };
-
-
-
 
 #endif

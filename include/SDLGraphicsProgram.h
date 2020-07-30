@@ -19,14 +19,13 @@
 // may support multiple platforms with different
 // dependencies.
 #if defined(LINUX) || defined(MINGW)
-    #include <SDL2/SDL.h>
+#include <SDL2/SDL.h>
 #else // This works for Mac
-    #include <SDL.h>
+#include <SDL.h>
 #endif
 
 // The glad library helps setup OpenGL extensions.
 #include <glad/glad.h>
-
 
 #include <iostream>
 #include <string>
@@ -43,9 +42,9 @@
 //
 //
 //
-class SDLGraphicsProgram{
+class SDLGraphicsProgram
+{
 public:
-
     // Constructor
     SDLGraphicsProgram(int w, int h);
     // Desctructor
@@ -59,7 +58,7 @@ public:
     // loop that runs forever
     void loop();
     // Get Pointer to Window
-    SDL_Window* getSDLWindow();
+    SDL_Window *getSDLWindow();
     // Helper Function to Query OpenGL information.
     void getOpenGLVersionInfo();
 
@@ -68,11 +67,11 @@ private:
     int screenHeight;
     int screenWidth;
     // The window we'll be rendering to
-    SDL_Window* gWindow ;
+    SDL_Window *gWindow;
     // OpenGL context
     SDL_GLContext gContext;
     // My object
-    std::vector<Object*> objects;
+    std::vector<Object *> objects;
 };
 
 #endif

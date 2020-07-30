@@ -25,7 +25,8 @@
 // An abstraction to create multiple objects
 //
 //
-class Object{
+class Object
+{
 public:
     // Object Constructor
     Object();
@@ -38,12 +39,13 @@ public:
     // How to draw the object
     void render();
     // Returns an objects transform
-    Transform& getTransform();
+    Transform &getTransform();
     // Loads a specific texture
     void LoadTexture(std::string fileName);
+
 private:
-	// Helper method for when we are ready to draw or update our object
-	void Bind();
+    // Helper method for when we are ready to draw or update our object
+    void Bind();
     // For now we have one shader per object.
     Shader myShader;
     // For now we have one buffer per object.
@@ -51,12 +53,11 @@ private:
     // For now we have one diffuse map and one normal map per object
     Texture diffuseMap;
     // Store the objects transformations
-    Transform transform; 
+    Transform transform;
     // Store the 'camera'
     glm::mat4 projectionMatrix;
-	// Store the objects Geometry
-	Geometry geometry;
+    // Store the objects Geometry
+    Geometry geometry;
 };
-
 
 #endif
