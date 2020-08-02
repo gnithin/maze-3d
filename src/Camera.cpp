@@ -1,6 +1,7 @@
 #include "Camera.h"
 
 #include "glm/gtx/transform.hpp"
+#include "mazeGenerator.h"
 
 #include <iostream>
 
@@ -103,7 +104,11 @@ Camera::Camera()
 {
     std::cout << "Created a Single Camera!\n";
     // Position us at the origin.
-    eyePosition = glm::vec3(0.0f, 0.0f, 10.0f);
+    MazeGenerator *generator = new MazeGenerator();
+    int i, j;
+    generator->getStartingIndex(&i, &j);
+
+    eyePosition = glm::vec3((j * 1.0f) - 0.5f, 0.5f, (i * 1.0f) + 0.5f);
     // Looking down along the z-axis initially.
     // Remember, this is negative because we are looking 'into' the scene.
     viewDirection = glm::vec3(0.0f, 0.0f, -1.0f);
