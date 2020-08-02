@@ -1,10 +1,12 @@
 #include "maze.h"
 
-#define UNIT_DISTANCE 2.0f
+#define UNIT_DISTANCE 1.0f
 
+// NOTE: MazePoint(up, down, left, right)
 std::vector<std::vector<MazePoint>> mazeMatrix{
-    {MazePoint(0, 1, 0, 1), MazePoint(0, 0, 0, 0)},
-    {MazePoint(0, 0, 0, 0), MazePoint(1, 0, 1, 0)},
+    {MazePoint(0, 1, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 1, 1, 0)},
+    {MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0)},
+    {MazePoint(1, 0, 0, 1), MazePoint(1, 0, 0, 0), MazePoint(1, 0, 1, 0)},
 };
 
 Maze::Maze(int w, int h) : screenWidth(w), screenHeight(h)
@@ -79,22 +81,32 @@ void Maze::update()
                 Object *currWall = objects[currWallIndex];
                 currWall->getTransform().loadIdentity();
                 currWall->getTransform().translate(
-                    getXIdentityTranslationForIndex(j),
+                    j,
                     0.0f,
-                    getXIdentityTranslationForIndex(i));
-                currWall->getTransform().rotate(glm::radians(90.0f), 0.0f, 1.0f, 0.0f);
+                    i);
+                float rotDirn = 90.0f;
+                if (curr.down == 1)
+                {
+                    rotDirn = -90.0f;
+                }
+                currWall->getTransform().rotate(glm::radians(rotDirn), 0.0f, 1.0f, 0.0f);
                 currWall->update(screenWidth, screenHeight);
             }
-            if (curr.left == 1 || curr.right == 1)
+            if (curr.right == 1 || curr.left == 1)
             {
                 // Horizontal walls
                 currWallIndex += 1;
                 Object *currWall = objects[currWallIndex];
                 currWall->getTransform().loadIdentity();
                 currWall->getTransform().translate(
-                    getXIdentityTranslationForIndex(j),
+                    j,
                     0.0f,
-                    getXIdentityTranslationForIndex(i));
+                    i);
+
+                if (curr.left == 1)
+                {
+                    currWall->getTransform().rotate(glm::radians(180.f), 0.0f, 1.0f, 0.0f);
+                }
                 currWall->update(screenWidth, screenHeight);
             }
         }
@@ -115,14 +127,13 @@ void Maze::update()
     // objects[2]->update(screenWidth, screenHeight);
 
     // Floor
-    float scaleFactor = (matrixSize - 1) * singleSize;
+    float scaleFactor = (matrixSize - 1);
 
     // Scale the floor according to the size of the matrix
     int floorIndex = numWalls;
     Object *floor = objects[floorIndex];
     floor->getTransform().loadIdentity();
-    floor->getTransform().translate(0.0f, -1.0f, 0.0f);
-    // floor->getTransform().scale(scaleFactor, scaleFactor, scaleFactor);
+    floor->getTransform().scale(scaleFactor, scaleFactor, scaleFactor);
     floor->getTransform().rotate(glm::radians(90.0f), 1.0f, 0.0f, 0.0f);
     floor->update(screenWidth, screenHeight);
 }

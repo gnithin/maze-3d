@@ -60,17 +60,17 @@ void Object::init()
     // Setup geometry
     // Be careful not to forget comma's after each line
     // (except the last line of course)!
-    geometry.addVertex(-1.0f, -1.0f, 0.0f); // Position and Normal
-    geometry.addTexture(0.0f, 0.0f);        // Texture
+    geometry.addVertex(0.0f, 0.0f, 0.0f); // Position and Normal
+    geometry.addTexture(0.0f, 0.0f);      // Texture
 
-    geometry.addVertex(1.0f, -1.0f, 0.0f); // Position and Normal
-    geometry.addTexture(1.0f, 0.0f);       // Texture
+    geometry.addVertex(1.0f, 0.0f, 0.0f); // Position and Normal
+    geometry.addTexture(1.0f, 0.0f);      // Texture
 
     geometry.addVertex(1.0f, 1.0f, 0.0f); // Position and Normal
     geometry.addTexture(1.0f, 1.0f);      // Texture
 
-    geometry.addVertex(-1.0f, 1.0f, 0.0f); // Position and Normal
-    geometry.addTexture(0.0f, 1.0f);       // Texture
+    geometry.addVertex(0.0f, 1.0f, 0.0f); // Position and Normal
+    geometry.addTexture(0.0f, 1.0f);      // Texture
     // Make our triangles and populate our
     // indices data structure
     geometry.makeTriangle(0, 1, 2);

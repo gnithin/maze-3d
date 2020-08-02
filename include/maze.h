@@ -25,6 +25,7 @@ private:
     std::vector<Object *> objects;
 
     float getXIdentityTranslationForIndex(int c);
+    float getHalfUnit();
 };
 
 #endif
