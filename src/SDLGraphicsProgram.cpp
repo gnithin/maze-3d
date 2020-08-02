@@ -129,21 +129,21 @@ void SDLGraphicsProgram::update()
     // Here we hard-code a giant scene
     // Yuck, we'll fix this in a future assignment.
     objects[0]->getTransform().loadIdentity();
-    objects[0]->getTransform().translate(0.0f, 0.0f, -3.0f);
+    objects[0]->getTransform().translate(0.0f, 0.0f, 0.0f);
     objects[0]->update(screenWidth, screenHeight);
 
     objects[1]->getTransform().loadIdentity();
-    objects[1]->getTransform().translate(1.0f, 0.0f, -3.0f);
+    objects[1]->getTransform().translate(1.0f, 0.0f, 0.0f);
     objects[1]->getTransform().rotate(glm::radians(90.0f), 0.0f, 1.0f, 0.0f);
     objects[1]->update(screenWidth, screenHeight);
 
     objects[2]->getTransform().loadIdentity();
-    objects[2]->getTransform().translate(-1.0f, 0.0f, -3.0f);
+    objects[2]->getTransform().translate(-1.0f, 0.0f, 0.0f);
     objects[2]->getTransform().rotate(glm::radians(90.0f), 0.0f, 1.0f, 0.0f);
     objects[2]->update(screenWidth, screenHeight);
 
     objects[3]->getTransform().loadIdentity();
-    objects[3]->getTransform().translate(0.0f, -1.0f, -4.0f);
+    objects[3]->getTransform().translate(0.0f, -1.0f, 0.0f);
     objects[3]->getTransform().scale(4.0f, 4.0f, 4.0f);
     objects[3]->getTransform().rotate(glm::radians(90.0f), 1.0f, 0.0f, 0.0f);
     objects[3]->update(screenWidth, screenHeight);

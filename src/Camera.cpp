@@ -103,7 +103,7 @@ Camera::Camera()
 {
     std::cout << "Created a Single Camera!\n";
     // Position us at the origin.
-    eyePosition = glm::vec3(0.0f, 0.0f, 0.0f);
+    eyePosition = glm::vec3(0.0f, 0.0f, 10.0f);
     // Looking down along the z-axis initially.
     // Remember, this is negative because we are looking 'into' the scene.
     viewDirection = glm::vec3(0.0f, 0.0f, -1.0f);
