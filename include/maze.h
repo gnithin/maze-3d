@@ -19,9 +19,12 @@ private:
     // Screen dimension constants
     int screenHeight;
     int screenWidth;
+    int numWalls;
 
     // All the maze objects
     std::vector<Object *> objects;
+
+    float getXIdentityTranslationForIndex(int c);
 };
 
 #endif
