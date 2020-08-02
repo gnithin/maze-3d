@@ -36,6 +36,7 @@
 #include "Shader.h"
 #include "Buffer.h"
 #include "Object.h"
+#include "maze.h"
 
 // Purpose:
 // This class sets up a full graphics program using SDL
@@ -70,8 +71,8 @@ private:
     SDL_Window *gWindow;
     // OpenGL context
     SDL_GLContext gContext;
-    // My object
-    std::vector<Object *> objects;
+    // Maze object
+    Maze *maze;
 };
 
 #endif

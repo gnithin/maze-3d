@@ -1,5 +1,6 @@
 #include "SDLGraphicsProgram.h"
 #include "Camera.h"
+#include "maze.h"
 
 #define OBJECTS 4
 
@@ -85,26 +86,13 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h) : screenWidth(w), screenHei
     // SDL_LogSetAllPriority(SDL_LOG_PRIORITY_WARN); // Uncomment to enable extra debug support!
     getOpenGLVersionInfo();
 
-    // Setup our objects
-    for (int i = 0; i < OBJECTS - 1; ++i)
-    {
-        Object *temp = new Object;
-        temp->LoadTexture("brick.ppm");
-        objects.push_back(temp);
-    }
-    // One more object for the floor
-    Object *temp = new Object;
-    temp->LoadTexture("grass.ppm");
-    objects.push_back(temp);
+    // Setup the maze
+    maze = new Maze(screenWidth, screenHeight);
 }
 
 // Proper shutdown of SDL and destroy initialized objects
 SDLGraphicsProgram::~SDLGraphicsProgram()
 {
-    for (int i = 0; i < OBJECTS; ++i)
-    {
-        delete objects[i];
-    }
     //Destroy window
     SDL_DestroyWindow(gWindow);
     // Point gWindow to NULL to ensure it points to nothing.
@@ -128,25 +116,7 @@ void SDLGraphicsProgram::update()
 {
     // Here we hard-code a giant scene
     // Yuck, we'll fix this in a future assignment.
-    objects[0]->getTransform().loadIdentity();
-    objects[0]->getTransform().translate(0.0f, 0.0f, 0.0f);
-    objects[0]->update(screenWidth, screenHeight);
-
-    objects[1]->getTransform().loadIdentity();
-    objects[1]->getTransform().translate(1.0f, 0.0f, 0.0f);
-    objects[1]->getTransform().rotate(glm::radians(90.0f), 0.0f, 1.0f, 0.0f);
-    objects[1]->update(screenWidth, screenHeight);
-
-    objects[2]->getTransform().loadIdentity();
-    objects[2]->getTransform().translate(-1.0f, 0.0f, 0.0f);
-    objects[2]->getTransform().rotate(glm::radians(90.0f), 0.0f, 1.0f, 0.0f);
-    objects[2]->update(screenWidth, screenHeight);
-
-    objects[3]->getTransform().loadIdentity();
-    objects[3]->getTransform().translate(0.0f, -1.0f, 0.0f);
-    objects[3]->getTransform().scale(4.0f, 4.0f, 4.0f);
-    objects[3]->getTransform().rotate(glm::radians(90.0f), 1.0f, 0.0f, 0.0f);
-    objects[3]->update(screenWidth, screenHeight);
+    maze->update();
 }
 
 // Render
@@ -174,11 +144,7 @@ void SDLGraphicsProgram::render()
     // Nice way to debug your scene in wireframe!
     //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
-    // Render all of our objects in a simple loop
-    for (int i = 0; i < OBJECTS; ++i)
-    {
-        objects[i]->render();
-    }
+    maze->render();
 
     // Delay to slow things down just a bit!
     SDL_Delay(25);
