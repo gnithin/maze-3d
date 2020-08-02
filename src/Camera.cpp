@@ -104,7 +104,7 @@ Camera::Camera()
 {
     std::cout << "Created a Single Camera!\n";
     // Position us at the origin.
-    MazeGenerator *generator = new MazeGenerator();
+    MazeGenerator *generator = MazeGenerator::instance();
     int i, j;
     generator->getStartingIndex(&i, &j);
 

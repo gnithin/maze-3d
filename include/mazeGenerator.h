@@ -5,8 +5,13 @@
 
 class MazeGenerator
 {
-    // TODO: Make this generator a singleton
 public:
+    static MazeGenerator *instance()
+    {
+        static MazeGenerator *instance = new MazeGenerator();
+        return instance;
+    }
+
     std::vector<std::vector<MazePoint>> getMazeMatrix()
     {
         return mazeMatrix;
@@ -34,13 +39,18 @@ public:
     }
 
 private:
-    // NOTE: MazePoint(up, down, left, right)
-    std::vector<std::vector<MazePoint>> mazeMatrix{
-        {MazePoint(0, 1, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 1, 1, 0)},
-        {MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0)},
-        {MazePoint(1, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(1, 0, 0, 0)},
-        {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 0, -1, 0), MazePoint(1, 0, 1, 0)},
+    MazeGenerator(){
+        // Prevent anyone from calling this
     };
+
+    // NOTE: MazePoint(up, down, left, right)
+    std::vector<std::vector<MazePoint>>
+        mazeMatrix{
+            {MazePoint(0, 1, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 1, 1, 0)},
+            {MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0)},
+            {MazePoint(1, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(1, 0, 0, 0)},
+            {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 0, -1, 0), MazePoint(1, 0, 1, 0)},
+        };
 };
 
 #endif

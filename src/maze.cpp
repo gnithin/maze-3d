@@ -3,7 +3,7 @@
 
 Maze::Maze(int w, int h) : screenWidth(w), screenHeight(h)
 {
-    MazeGenerator *generator = new MazeGenerator();
+    MazeGenerator *generator = MazeGenerator::instance();
     mazeMatrix = generator->getMazeMatrix();
 
     // Get the number of walls;
