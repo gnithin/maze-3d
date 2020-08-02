@@ -112,20 +112,6 @@ void Maze::update()
             }
         }
     }
-    // Walls
-    // objects[0]->getTransform().loadIdentity();
-    // objects[0]->getTransform().translate(0.0f, 0.0f, 0.0f);
-    // objects[0]->update(screenWidth, screenHeight);
-
-    // objects[1]->getTransform().loadIdentity();
-    // objects[1]->getTransform().translate(1.0f, 0.0f, 0.0f);
-    // objects[1]->getTransform().rotate(glm::radians(90.0f), 0.0f, 1.0f, 0.0f);
-    // objects[1]->update(screenWidth, screenHeight);
-
-    // objects[2]->getTransform().loadIdentity();
-    // objects[2]->getTransform().translate(-1.0f, 0.0f, 0.0f);
-    // objects[2]->getTransform().rotate(glm::radians(90.0f), 0.0f, 1.0f, 0.0f);
-    // objects[2]->update(screenWidth, screenHeight);
 
     // Floor
     float scaleFactor = (matrixSize - 1);
@@ -146,10 +132,4 @@ void Maze::render()
     {
         objects[i]->render();
     }
-}
-
-float Maze::getXIdentityTranslationForIndex(int c)
-{
-    float res = ((((float)c) / (mazeMatrix.size() - 1)) * 2.0f) - 1.0f;
-    return res;
 }
