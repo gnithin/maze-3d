@@ -1,17 +1,11 @@
 #include "maze.h"
-
-#define UNIT_DISTANCE 1.0f
-
-// NOTE: MazePoint(up, down, left, right)
-std::vector<std::vector<MazePoint>> mazeMatrix{
-    {MazePoint(0, 1, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 1, 1, 0)},
-    {MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0)},
-    {MazePoint(1, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(1, 0, 0, 0)},
-    {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(1, 0, 1, 0)},
-};
+#include "mazeGenerator.h"
 
 Maze::Maze(int w, int h) : screenWidth(w), screenHeight(h)
 {
+    MazeGenerator *generator = new MazeGenerator();
+    mazeMatrix = generator->getMazeMatrix();
+
     // Get the number of walls;
     numWalls = 0;
     for (int i = 0; i < mazeMatrix.size(); i++)
@@ -67,8 +61,6 @@ Maze::~Maze()
 void Maze::update()
 {
     int matrixSize = mazeMatrix.size();
-    float singleSize = UNIT_DISTANCE;
-
     int currWallIndex = -1;
     for (int i = 0; i < mazeMatrix.size(); i += 1)
     {

@@ -13,6 +13,7 @@ public:
     std::vector<Object *> getMazeObjects();
     void update();
     void render();
+    void getStartingIndex(int *r, int *c);
     ~Maze();
 
 private:
@@ -20,6 +21,7 @@ private:
     int screenHeight;
     int screenWidth;
     int numWalls;
+    std::vector<std::vector<MazePoint>> mazeMatrix;
 
     // All the maze objects
     std::vector<Object *> objects;
