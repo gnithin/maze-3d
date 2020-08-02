@@ -206,14 +206,6 @@ void SDLGraphicsProgram::loop()
                 case SDLK_DOWN:
                     Camera::instance().moveBackward(cameraSpeed);
                     break;
-                case SDLK_LSHIFT:
-                case SDLK_RSHIFT:
-                    Camera::instance().moveUp(cameraSpeed);
-                    break;
-                case SDLK_LCTRL:
-                case SDLK_RCTRL:
-                    Camera::instance().moveDown(cameraSpeed);
-                    break;
                 }
                 break;
             }
