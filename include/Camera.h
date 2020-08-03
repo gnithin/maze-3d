@@ -12,6 +12,7 @@
 #define CAMERA_H
 
 #include "glm/glm.hpp"
+#include "maze.h"
 
 class Camera
 {
@@ -54,6 +55,8 @@ private:
     // to 'rock' or 'rattle' the camera you might play
     // with modifying this value.
     glm::vec3 upVector;
+
+    Maze *maze;
 };
 
 #endif
