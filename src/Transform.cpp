@@ -3,7 +3,7 @@
 
 Transform::Transform()
 {
-    std::cout << "(Transform.cpp) Constructor Called\n";
+    // std::cout << "(Transform.cpp) Constructor Called\n";
     modelTransformMatrix = glm::mat4();
 }
 

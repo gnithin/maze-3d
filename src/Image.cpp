@@ -39,7 +39,7 @@ void Image::loadPPM(bool flip)
         std::string line;
         // Our loop invariant is to continue reading input until
         // we reach the end of the file and it reads in a NULL character
-        std::cout << "Reading in ppm file: " << m_filepath << std::endl;
+        // std::cout << "Reading in ppm file: " << m_filepath << std::endl;
         unsigned int iteration = 0;
         unsigned int pos = 0;
         while (getline(ppmFile, line))
