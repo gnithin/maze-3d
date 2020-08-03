@@ -87,7 +87,7 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h) : screenWidth(w), screenHei
     getOpenGLVersionInfo();
 
     // Setup the maze
-    maze = new Maze();
+    maze = Maze::instance();
 }
 
 // Proper shutdown of SDL and destroy initialized objects

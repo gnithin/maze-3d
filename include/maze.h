@@ -9,7 +9,12 @@
 class Maze
 {
 public:
-    Maze();
+    static Maze *instance()
+    {
+        static Maze *mazeInstance = new Maze();
+        return mazeInstance;
+    }
+
     std::vector<Object *> getMazeObjects();
     void update(int screenWidth, int screenHeight);
     void render();
@@ -18,6 +23,7 @@ public:
     ~Maze();
 
 private:
+    Maze();
     int numWalls;
     std::vector<std::vector<MazePoint>> mazeMatrix;
 
