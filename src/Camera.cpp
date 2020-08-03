@@ -120,7 +120,7 @@ Camera::Camera()
     eyePosition = glm::vec3(
         (j * 1.0f) - delta,
         0.5f,
-        (i * 1.0f) + delta);
+        (i * 1.0f));
     // Looking down along the z-axis initially.
     // Remember, this is negative because we are looking 'into' the scene.
     viewDirection = glm::vec3(0.0f, 0.0f, -1.0f);
