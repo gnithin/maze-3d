@@ -27,6 +27,29 @@ Image::~Image()
 //
 // flip - Will flip the pixels upside down in the data
 //        If you use this be consistent.
+
+std::vector<std::string> Image::splitStrings(std::string line) {
+    std::vector<std::string> res = {};
+
+    std::string cur = "";
+    for (auto c : line) {
+
+        if (c == ',' || c == '\t' || c == '\n' || c == ' ') {
+            res.push_back(cur);
+            cur = "";
+        }
+        else {
+            cur += c;
+        }
+
+    }
+
+    res.push_back(cur);
+
+    return res;
+}
+
+
 void Image::loadPPM(bool flip)
 {
 
@@ -53,15 +76,23 @@ void Image::loadPPM(bool flip)
                 
                 // Returns first token
 
+
+                
                 // strok can't build on visual studio
+                /*
                 char separators[] = " ,\t\n";
                 char* token, * next_token;
                 token = strtok_s((char*)line.c_str(), separators, &next_token);
                 m_width = atoi(token);
                 token = strtok_s(NULL, separators, &next_token);
                 m_height = atoi(token);
+                */
+
                 
-                
+                std::vector<std::string>res = splitStrings(line);
+                m_width = std::stoi(res[0]);
+                m_height = std::stoi(res[1]);
+
                 
                 /*
                 char *token = strtok((char *)line.c_str(), " ");

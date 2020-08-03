@@ -10,6 +10,7 @@
 #define IMAGE_H
 
 #include <string>
+#include <vector>
 
 class Image
 {
@@ -52,6 +53,9 @@ private:
     int m_height{0};         // Height of the image
     int m_BPP{0};            // Bits per pixel (i.e. how colorful are our pixels)
     std::string magicNumber; // magicNumber if any for image format
+
+    std::vector<std::string>splitStrings(std::string line);
+
 };
 
 #endif
