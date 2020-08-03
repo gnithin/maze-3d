@@ -1,5 +1,7 @@
 #include "Object.h"
 #include "Camera.h"
+// for std min, max
+#include <algorithm>
 
 // This assert inserts a breakpoint in your code!
 // That way we can get the line number and file.

@@ -50,11 +50,26 @@ void Image::loadPPM(bool flip)
             }
             else if (iteration == 1)
             {
+                
                 // Returns first token
+
+                // strok can't build on visual studio
+                char separators[] = " ,\t\n";
+                char* token, * next_token;
+                token = strtok_s((char*)line.c_str(), separators, &next_token);
+                m_width = atoi(token);
+                token = strtok_s(NULL, separators, &next_token);
+                m_height = atoi(token);
+                
+                
+                
+                /*
                 char *token = strtok((char *)line.c_str(), " ");
                 m_width = atoi(token);
                 token = strtok(NULL, " ");
                 m_height = atoi(token);
+                */
+
                 // std::cout << "PPM width,height=" << m_width << "," << m_height << "\n";
                 if (m_width > 0 && m_height > 0)
                 {
