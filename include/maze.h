@@ -25,9 +25,6 @@ private:
 
     // All the maze objects
     std::vector<Object *> objects;
-
-    float getXIdentityTranslationForIndex(int c);
-    float getHalfUnit();
 };
 
 #endif
