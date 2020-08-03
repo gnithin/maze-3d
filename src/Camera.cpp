@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-const float UNIT_MOVEMENT = 0.25;
+const float UNIT_MOVEMENT = 0.10;
 const float MOUSE_SENSITIVITY = 0.003;
 
 Camera &Camera::instance()
@@ -36,7 +36,7 @@ void Camera::mouseLook(int mouseX, int mouseY)
 void Camera::moveForward(float speed)
 {
     float newPosition = eyePosition[2] - UNIT_MOVEMENT;
-    if (maze->isOnTheWall(eyePosition[0], eyePosition[1], newPosition))
+    if (!maze->isOnTheWall(eyePosition[0], eyePosition[1], newPosition))
     {
         eyePosition[2] = newPosition;
     }
@@ -45,7 +45,7 @@ void Camera::moveForward(float speed)
 void Camera::moveBackward(float speed)
 {
     float newPosition = eyePosition[2] + UNIT_MOVEMENT;
-    if (maze->isOnTheWall(eyePosition[0], eyePosition[1], newPosition))
+    if (!maze->isOnTheWall(eyePosition[0], eyePosition[1], newPosition))
     {
         eyePosition[2] = newPosition;
     }
@@ -54,7 +54,7 @@ void Camera::moveBackward(float speed)
 void Camera::moveLeft(float speed)
 {
     float newPosition = eyePosition[0] - UNIT_MOVEMENT;
-    if (maze->isOnTheWall(newPosition, eyePosition[1], eyePosition[2]))
+    if (!maze->isOnTheWall(newPosition, eyePosition[1], eyePosition[2]))
     {
         eyePosition[0] = newPosition;
     }
@@ -63,7 +63,7 @@ void Camera::moveLeft(float speed)
 void Camera::moveRight(float speed)
 {
     float newPosition = eyePosition[0] + UNIT_MOVEMENT;
-    if (maze->isOnTheWall(newPosition, eyePosition[1], eyePosition[2]))
+    if (!maze->isOnTheWall(newPosition, eyePosition[1], eyePosition[2]))
     {
         eyePosition[0] = newPosition;
     }

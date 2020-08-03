@@ -78,6 +78,12 @@ void Object::init()
 
     geometry.gen();
 
+    // The bounding box follows the initial set of vertices exactly
+    boundingBox.push_back(glm::vec3(0.0f, 0.0f, 0.0f));
+    boundingBox.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+    boundingBox.push_back(glm::vec3(1.0f, 1.0f, 0.0f));
+    boundingBox.push_back(glm::vec3(0.0f, 1.0f, 0.0f));
+
     // Create a buffer and set the stride of information
     myBuffer.CreateBufferNormalMapLayout(14,
                                          geometry.getSize(),
@@ -158,4 +164,33 @@ void Object::render()
 Transform &Object::getTransform()
 {
     return transform;
+}
+
+CoordMax Object::getBoundingBox()
+{
+    CoordMax coordMax;
+    for (int i = 0; i < boundingBox.size(); i += 1)
+    {
+        glm::vec3 box = boundingBox[i];
+        glm::vec4 res = transform.getInternalMatrix() * glm::vec4(box[0], box[1], box[2], 1.0f);
+        if (i == 0)
+        {
+            coordMax.xMax = res[0];
+            coordMax.xMin = res[0];
+            coordMax.yMax = res[1];
+            coordMax.yMin = res[1];
+            coordMax.zMax = res[2];
+            coordMax.zMin = res[2];
+        }
+        else
+        {
+            coordMax.xMax = std::max(res[0], coordMax.xMax);
+            coordMax.xMin = std::min(res[0], coordMax.xMin);
+            coordMax.yMax = std::max(res[1], coordMax.yMax);
+            coordMax.yMin = std::min(res[1], coordMax.yMin);
+            coordMax.zMax = std::max(res[2], coordMax.zMax);
+            coordMax.zMin = std::min(res[2], coordMax.zMin);
+        }
+    }
+    return coordMax;
 }

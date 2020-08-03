@@ -55,7 +55,7 @@ void Image::loadPPM(bool flip)
                 m_width = atoi(token);
                 token = strtok(NULL, " ");
                 m_height = atoi(token);
-                std::cout << "PPM width,height=" << m_width << "," << m_height << "\n";
+                // std::cout << "PPM width,height=" << m_width << "," << m_height << "\n";
                 if (m_width > 0 && m_height > 0)
                 {
                     m_PixelData = new unsigned char[m_width * m_height * 3];

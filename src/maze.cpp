@@ -128,7 +128,17 @@ void Maze::render()
 
 bool Maze::isOnTheWall(float x, float y, float z, float threshold)
 {
-    // TODO: Add this function
     // First numWall objects are walls
+    for (int i = 0; i < numWalls; i += 1)
+    {
+        CoordMax coordLimits = objects[i]->getBoundingBox();
+        if (
+            x < (coordLimits.xMax + threshold) && x > (coordLimits.xMin - threshold) &&
+            y < (coordLimits.yMax + threshold) && y > (coordLimits.yMin - threshold) &&
+            z < (coordLimits.zMax + threshold) && z > (coordLimits.zMin - threshold))
+        {
+            return true;
+        }
+    }
     return false;
 }

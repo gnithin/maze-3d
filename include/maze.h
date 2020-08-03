@@ -19,7 +19,7 @@ public:
     void update(int screenWidth, int screenHeight);
     void render();
     void getStartingIndex(int *r, int *c);
-    bool isOnTheWall(float x, float y, float z, float threshold = 0.10f);
+    bool isOnTheWall(float x, float y, float z, float threshold = 0.12f);
     ~Maze();
 
 private:
