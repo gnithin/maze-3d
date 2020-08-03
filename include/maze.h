@@ -9,17 +9,15 @@
 class Maze
 {
 public:
-    Maze(int w, int h);
+    Maze();
     std::vector<Object *> getMazeObjects();
-    void update();
+    void update(int screenWidth, int screenHeight);
     void render();
     void getStartingIndex(int *r, int *c);
+    bool isOnTheWall(float x, float y, float z, float threshold = 0.10f);
     ~Maze();
 
 private:
-    // Screen dimension constants
-    int screenHeight;
-    int screenWidth;
     int numWalls;
     std::vector<std::vector<MazePoint>> mazeMatrix;
 
