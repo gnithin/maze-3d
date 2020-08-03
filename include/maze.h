@@ -6,6 +6,12 @@
 #include "Object.h"
 #include "mazePoint.h"
 
+// NOTE: The WALL_THRESHOLD and the UNIT_MOVEMENT in the camera are linked.
+// If there is trouble with hitting the walls, play around with these parameters.
+// Usually the WALL_THRESHOLD must be a bit higher that the UNIT_MOVEMENT (else
+// the camera moves over the threshold and walks between walls)
+#define WALL_THRESHOLD 0.12f
+
 class Maze
 {
 public:
@@ -19,7 +25,7 @@ public:
     void update(int screenWidth, int screenHeight);
     void render();
     void getStartingIndex(int *r, int *c);
-    bool isOnTheWall(float x, float y, float z, float threshold = 0.12f);
+    bool isOnTheWall(float x, float y, float z, float threshold = WALL_THRESHOLD);
     ~Maze();
 
 private:
