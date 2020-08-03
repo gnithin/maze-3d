@@ -1,7 +1,7 @@
 #include "maze.h"
 #include "mazeGenerator.h"
 
-Maze::Maze(int w, int h) : screenWidth(w), screenHeight(h)
+Maze::Maze()
 {
     MazeGenerator *generator = MazeGenerator::instance();
     mazeMatrix = generator->getMazeMatrix();
@@ -58,7 +58,7 @@ Maze::~Maze()
     }
 }
 
-void Maze::update()
+void Maze::update(int screenWidth, int screenHeight)
 {
     int matrixSize = mazeMatrix.size();
     int currWallIndex = -1;
@@ -124,4 +124,21 @@ void Maze::render()
     {
         objects[i]->render();
     }
+}
+
+bool Maze::isOnTheWall(float x, float y, float z, float threshold)
+{
+    // First numWall objects are walls
+    for (int i = 0; i < numWalls; i += 1)
+    {
+        CoordMax coordLimits = objects[i]->getBoundingBox();
+        if (
+            x < (coordLimits.xMax + threshold) && x > (coordLimits.xMin - threshold) &&
+            y < (coordLimits.yMax + threshold) && y > (coordLimits.yMin - threshold) &&
+            z < (coordLimits.zMax + threshold) && z > (coordLimits.zMin - threshold))
+        {
+            return true;
+        }
+    }
+    return false;
 }

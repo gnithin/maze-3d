@@ -9,25 +9,26 @@
 class Maze
 {
 public:
-    Maze(int w, int h);
+    static Maze *instance()
+    {
+        static Maze *mazeInstance = new Maze();
+        return mazeInstance;
+    }
+
     std::vector<Object *> getMazeObjects();
-    void update();
+    void update(int screenWidth, int screenHeight);
     void render();
     void getStartingIndex(int *r, int *c);
+    bool isOnTheWall(float x, float y, float z, float threshold = 0.12f);
     ~Maze();
 
 private:
-    // Screen dimension constants
-    int screenHeight;
-    int screenWidth;
+    Maze();
     int numWalls;
     std::vector<std::vector<MazePoint>> mazeMatrix;
 
     // All the maze objects
     std::vector<Object *> objects;
-
-    float getXIdentityTranslationForIndex(int c);
-    float getHalfUnit();
 };
 
 #endif

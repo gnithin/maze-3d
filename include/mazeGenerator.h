@@ -46,10 +46,11 @@ private:
     // NOTE: MazePoint(up, down, left, right)
     std::vector<std::vector<MazePoint>>
         mazeMatrix{
-            {MazePoint(0, 1, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 1, 1, 0)},
-            {MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0)},
-            {MazePoint(1, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(1, 0, 0, 0)},
-            {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 0, -1, 0), MazePoint(1, 0, 1, 0)},
+            {MazePoint(0, 1, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 1, 1, 0)},
+            {MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 0, 0)},
+            {MazePoint(1, 0, 0, 0), MazePoint(0, 1, 0, 0), MazePoint(0, 0, 1, 0), MazePoint(1, 0, 0, 0), MazePoint(1, 0, 0, 0)},
+            {MazePoint(1, 0, 0, 0), MazePoint(0, 0, 1, 0), MazePoint(1, 0, 0, 0), MazePoint(1, 0, 0, 0), MazePoint(1, 0, 0, 0)},
+            {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 1, 0), MazePoint(1, 0, 0, 0), MazePoint(1, 0, -1, 0), MazePoint(1, 0, 1, 0)},
         };
 };
 

@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-const float UNIT_MOVEMENT = 0.25;
+const float UNIT_MOVEMENT = 0.10;
 const float MOUSE_SENSITIVITY = 0.003;
 
 Camera &Camera::instance()
@@ -16,7 +16,6 @@ Camera &Camera::instance()
 
 void Camera::mouseLook(int mouseX, int mouseY)
 {
-    // TODO: Which vector are you modifying?
     if (oldMousePosition.x == 0 && oldMousePosition.y == 0)
     {
         oldMousePosition.x = mouseX;
@@ -36,37 +35,47 @@ void Camera::mouseLook(int mouseX, int mouseY)
 
 void Camera::moveForward(float speed)
 {
-    // TODO: Which vector are you modifying?
-    eyePosition[2] -= UNIT_MOVEMENT;
+    float newPosition = eyePosition[2] - UNIT_MOVEMENT;
+    if (!maze->isOnTheWall(eyePosition[0], eyePosition[1], newPosition))
+    {
+        eyePosition[2] = newPosition;
+    }
 }
 
 void Camera::moveBackward(float speed)
 {
-    // TODO: Which vector are you modifying?
-    eyePosition[2] += UNIT_MOVEMENT;
+    float newPosition = eyePosition[2] + UNIT_MOVEMENT;
+    if (!maze->isOnTheWall(eyePosition[0], eyePosition[1], newPosition))
+    {
+        eyePosition[2] = newPosition;
+    }
 }
 
 void Camera::moveLeft(float speed)
 {
-    // TODO: Which vector are you modifying?
-    eyePosition[0] -= UNIT_MOVEMENT;
+    float newPosition = eyePosition[0] - UNIT_MOVEMENT;
+    if (!maze->isOnTheWall(newPosition, eyePosition[1], eyePosition[2]))
+    {
+        eyePosition[0] = newPosition;
+    }
 }
 
 void Camera::moveRight(float speed)
 {
-    // TODO: Which vector are you modifying?
-    eyePosition[0] += UNIT_MOVEMENT;
+    float newPosition = eyePosition[0] + UNIT_MOVEMENT;
+    if (!maze->isOnTheWall(newPosition, eyePosition[1], eyePosition[2]))
+    {
+        eyePosition[0] = newPosition;
+    }
 }
 
 void Camera::moveUp(float speed)
 {
-    // TODO: Which vector are you modifying?
     eyePosition[1] += UNIT_MOVEMENT;
 }
 
 void Camera::moveDown(float speed)
 {
-    // TODO: Which vector are you modifying?
     eyePosition[1] -= UNIT_MOVEMENT;
 }
 
@@ -102,7 +111,6 @@ float Camera::getViewZDirection()
 
 Camera::Camera()
 {
-    std::cout << "Created a Single Camera!\n";
     // Position us at the origin.
     MazeGenerator *generator = MazeGenerator::instance();
     int i, j;
@@ -118,6 +126,7 @@ Camera::Camera()
     viewDirection = glm::vec3(0.0f, 0.0f, -1.0f);
     // For now--our upVector always points up along the y-axis
     upVector = glm::vec3(0.0f, 1.0f, 0.0f);
+    maze = Maze::instance();
 }
 
 glm::mat4 Camera::getWorldToViewmatrix() const

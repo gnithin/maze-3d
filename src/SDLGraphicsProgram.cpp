@@ -87,7 +87,7 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h) : screenWidth(w), screenHei
     getOpenGLVersionInfo();
 
     // Setup the maze
-    maze = new Maze(screenWidth, screenHeight);
+    maze = Maze::instance();
 }
 
 // Proper shutdown of SDL and destroy initialized objects
@@ -114,9 +114,7 @@ bool SDLGraphicsProgram::initGL()
 // Update OpenGL
 void SDLGraphicsProgram::update()
 {
-    // Here we hard-code a giant scene
-    // Yuck, we'll fix this in a future assignment.
-    maze->update();
+    maze->update(screenWidth, screenHeight);
 }
 
 // Render

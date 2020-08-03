@@ -17,6 +17,7 @@
 #include "Texture.h"
 #include "Transform.h"
 #include "Geometry.h"
+#include "coordMax.h"
 
 #include "glm/vec3.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -43,6 +44,8 @@ public:
     // Loads a specific texture
     void LoadTexture(std::string fileName);
 
+    CoordMax getBoundingBox();
+
 private:
     // Helper method for when we are ready to draw or update our object
     void Bind();
@@ -58,6 +61,8 @@ private:
     glm::mat4 projectionMatrix;
     // Store the objects Geometry
     Geometry geometry;
+
+    std::vector<glm::vec3> boundingBox;
 };
 
 #endif
