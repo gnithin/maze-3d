@@ -20,9 +20,11 @@ struct PointLight{
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
+
+    float attentuateFactor;
 };
 
-uniform PointLight pointLights[1];
+uniform PointLight pointLights[2];
 
 // Used for our specular highlights
 uniform mat4 view;
@@ -49,7 +51,7 @@ void main()
 
     vec3 lightSum = vec3(0.0, 0.0, 0.0);
     lightSum += calcPointLight(norm, diffuseColor, pointLights[0]);
-
+    
     // Final color + "how dark or light to make fragment"
     FragColor = vec4(lightSum, 1.0);
 }
@@ -78,12 +80,13 @@ vec3 calcPointLight(vec3 norm, vec3 diffuseColor, PointLight pointLight){
     // Calculate Attenuation here
     // distance and lighting...
     float distance = length(pointLight.lightPos - FragPos);
-    float attenuation = 1.0 / (pointLight.constant + pointLight.linear * distance + pointLight.quadratic * (distance * distance));
+    if(pointLight.attentuateFactor > 0.0) {
+        float attenuation = 1.0 / (pointLight.constant + pointLight.linear * distance + pointLight.quadratic * (distance * distance));
 
-    diffuseLight *= attenuation;
-    ambient *= attenuation;
-    specular *= attenuation;
-
+        diffuseLight *= attenuation;
+        ambient *= attenuation;
+        specular *= attenuation;
+    }
     // Our final color is now based on the texture.
     // That is set by the diffuseColor
     return diffuseColor * (diffuseLight + ambient + specular);
