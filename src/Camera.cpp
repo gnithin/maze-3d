@@ -6,7 +6,9 @@
 #include <iostream>
 
 const float UNIT_MOVEMENT = 0.10;
-const float MOUSE_SENSITIVITY = 0.003;
+const float MOUSE_SENSITIVITY = 0.5;
+const float MOUSE_H_THRESHOLD = 0.1;
+const float MOUSE_V_THRESHOLD = 0.5;
 
 Camera &Camera::instance()
 {
@@ -23,50 +25,75 @@ void Camera::mouseLook(int mouseX, int mouseY)
         return;
     }
 
-    float xdiff = mouseX - oldMousePosition.x;
+    float xdiff = mouseX - oldMousePosition.x;            
+    if (abs(xdiff) > MOUSE_H_THRESHOLD) {
+        oldMousePosition.x = mouseX;
+        if (xdiff > 0) {            
+            lookRight(MOUSE_SENSITIVITY);
+        }
+        else if (xdiff < 0) {            
+            lookLeft(MOUSE_SENSITIVITY);
+        }
+    }
+
     float ydiff = mouseY - oldMousePosition.y;
+    if (abs(ydiff) > MOUSE_V_THRESHOLD) {
 
-    oldMousePosition.x = mouseX;
-    oldMousePosition.y = mouseY;
+        oldMousePosition.y = mouseY;
 
-    viewDirection.x += xdiff * MOUSE_SENSITIVITY;
-    viewDirection.y -= ydiff * MOUSE_SENSITIVITY;
+        if (ydiff > 0) {
+            lookUp(MOUSE_SENSITIVITY);
+        }
+        else if (ydiff < 0) {
+            lookDown(MOUSE_SENSITIVITY);
+        }
+    }
+
+}
+
+void Camera::moveOnXZ(float newPositionX, float newPositionZ) {
+    if (!maze->isOnTheWall(newPositionX, eyePosition[1], newPositionZ))
+    {
+        eyePosition[0] = newPositionX;
+        eyePosition[2] = newPositionZ;
+    }
 }
 
 void Camera::moveForward(float speed)
 {
-    float newPosition = eyePosition[2] - UNIT_MOVEMENT;
-    if (!maze->isOnTheWall(eyePosition[0], eyePosition[1], newPosition))
-    {
-        eyePosition[2] = newPosition;
-    }
+    //float newPosition = eyePosition[2] - UNIT_MOVEMENT;
+    float newPositionX = eyePosition[0] + speed * UNIT_MOVEMENT * cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    float newPositionZ = eyePosition[2] + speed * UNIT_MOVEMENT * sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+       
+
+    moveOnXZ(newPositionX, newPositionZ);
 }
 
 void Camera::moveBackward(float speed)
 {
-    float newPosition = eyePosition[2] + UNIT_MOVEMENT;
-    if (!maze->isOnTheWall(eyePosition[0], eyePosition[1], newPosition))
-    {
-        eyePosition[2] = newPosition;
-    }
+    //float newPosition = eyePosition[2] + UNIT_MOVEMENT;
+    float newPositionX = eyePosition[0] - speed * UNIT_MOVEMENT * cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    float newPositionZ = eyePosition[2] - speed * UNIT_MOVEMENT * sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+    moveOnXZ(newPositionX, newPositionZ);
 }
 
 void Camera::moveLeft(float speed)
 {
-    float newPosition = eyePosition[0] - UNIT_MOVEMENT;
-    if (!maze->isOnTheWall(newPosition, eyePosition[1], eyePosition[2]))
-    {
-        eyePosition[0] = newPosition;
-    }
+    //float newPosition = eyePosition[2] + UNIT_MOVEMENT;
+    float newPositionX = eyePosition[0] + speed * UNIT_MOVEMENT * sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    float newPositionZ = eyePosition[2] - speed * UNIT_MOVEMENT * cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+    moveOnXZ(newPositionX, newPositionZ);
 }
 
 void Camera::moveRight(float speed)
 {
-    float newPosition = eyePosition[0] + UNIT_MOVEMENT;
-    if (!maze->isOnTheWall(newPosition, eyePosition[1], eyePosition[2]))
-    {
-        eyePosition[0] = newPosition;
-    }
+    //float newPosition = eyePosition[2] + UNIT_MOVEMENT;
+    float newPositionX = eyePosition[0] - speed * UNIT_MOVEMENT * sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    float newPositionZ = eyePosition[2] + speed * UNIT_MOVEMENT * cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+    moveOnXZ(newPositionX, newPositionZ);
 }
 
 void Camera::moveUp(float speed)
@@ -77,6 +104,57 @@ void Camera::moveUp(float speed)
 void Camera::moveDown(float speed)
 {
     eyePosition[1] -= UNIT_MOVEMENT;
+}
+
+void Camera::setLookDirection() {
+    viewDirection.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    viewDirection.y = sin(glm::radians(pitch));
+    viewDirection.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+}
+
+void Camera::lookLeft(float speed) {
+
+    float xdiff = -2.0f * speed;
+    yaw += xdiff;
+    setLookDirection();
+}
+
+void Camera::lookRight(float speed) {
+
+    float xdiff = 2.0f * speed;
+    yaw += xdiff;
+    setLookDirection();
+}
+
+void Camera::lookDown(float speed) {
+    
+    float ydiff = 0.5f * speed;    
+    pitch += ydiff;
+
+    if (pitch > 89.0f) {
+        pitch = 89.0f;
+    }
+    else if (pitch < -89.0f) {
+        pitch = -89.0f;
+    }
+
+    setLookDirection();
+}
+
+void Camera::lookUp(float speed) {
+
+    float ydiff = -0.5f * speed;
+        
+    pitch += ydiff;
+
+    if (pitch > 89.0f) {
+        pitch = 89.0f;
+    }
+    else if (pitch < -89.0f) {
+        pitch = -89.0f;
+    }
+
+    setLookDirection();
 }
 
 float Camera::getEyeXPosition()
@@ -126,6 +204,11 @@ Camera::Camera()
     viewDirection = glm::vec3(0.0f, 0.0f, -1.0f);
     // For now--our upVector always points up along the y-axis
     upVector = glm::vec3(0.0f, 1.0f, 0.0f);
+
+    //mouse view:
+    yaw = -90.0f;
+    pitch = 0.0f;
+
     maze = Maze::instance();
 }
 

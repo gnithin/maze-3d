@@ -161,7 +161,7 @@ void SDLGraphicsProgram::loop()
     SDL_StartTextInput();
 
     // Set a default speed for the camera
-    float cameraSpeed = 0.05f;
+    float cameraSpeed = 1.0f;
 
     // While application is running
     while (!quit)
@@ -189,7 +189,7 @@ void SDLGraphicsProgram::loop()
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym)
                 {
-                case SDLK_q:
+                case SDLK_ESCAPE:
                     quit = true;
                     break;
                 case SDLK_LEFT:
@@ -203,6 +203,24 @@ void SDLGraphicsProgram::loop()
                     break;
                 case SDLK_DOWN:
                     Camera::instance().moveBackward(cameraSpeed);
+                    break;
+                case SDLK_a:
+                    Camera::instance().moveLeft(cameraSpeed);
+                    break;
+                case SDLK_d:
+                    Camera::instance().moveRight(cameraSpeed);
+                    break;
+                case SDLK_w:
+                    Camera::instance().moveForward(cameraSpeed);
+                    break;
+                case SDLK_s:
+                    Camera::instance().moveBackward(cameraSpeed);
+                    break;
+                case SDLK_q:
+                    Camera::instance().lookLeft(cameraSpeed);
+                    break;
+                case SDLK_e:
+                    Camera::instance().lookRight(cameraSpeed);
                     break;
                 }
                 break;

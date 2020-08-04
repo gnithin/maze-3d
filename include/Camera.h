@@ -27,12 +27,21 @@ public:
     glm::mat4 getWorldToViewmatrix() const;
     // Move the camera around
     void mouseLook(int mouseX, int mouseY);
+        
     void moveForward(float speed);
     void moveBackward(float speed);
     void moveLeft(float speed);
     void moveRight(float speed);
+            
     void moveUp(float speed);
     void moveDown(float speed);
+
+    //mouse look:
+    void lookLeft(float speed);
+    void lookRight(float speed);
+    void lookUp(float speed);
+    void lookDown(float speed);
+
     // Returns the 'eye' position which
     // is where the camera is.
     float getEyeXPosition();
@@ -55,6 +64,12 @@ private:
     // to 'rock' or 'rattle' the camera you might play
     // with modifying this value.
     glm::vec3 upVector;
+
+    // mouse view:
+    void setLookDirection();
+    void moveOnXZ(float newPositionX, float newPositionZ);
+    float yaw;
+    float pitch;
 
     Maze *maze;
 };
