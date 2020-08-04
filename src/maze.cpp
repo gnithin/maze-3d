@@ -41,7 +41,7 @@ Maze::Maze()
     }
     // One more object for the floor
     Object *floor = new Object;
-    floor->LoadTexture("brick.ppm");
+    floor->LoadTexture("container.ppm");
     objects.push_back(floor);
 }
 

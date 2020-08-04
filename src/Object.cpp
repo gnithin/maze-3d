@@ -139,7 +139,7 @@ void Object::update(unsigned int screenWidth, unsigned int screenHeight)
     myShader.setUniformMatrix4fv("projection", &projectionMatrix[0][0]);
 
     // Create a first 'light'
-    myShader.setUniform3f("pointLights[0].lightColor", 1.0f, 0.7f, 0.8f);
+    myShader.setUniform3f("pointLights[0].lightColor", 1.0f, 1.0f, 1.0f);
     myShader.setUniform3f("pointLights[0].lightPos", 5.0f, 20.0f, 10.0f);
     myShader.setUniform1f("pointLights[0].ambientIntensity", 0.8f);
     myShader.setUniform1f("pointLights[0].specularStrength", 0.0f);
