@@ -36,7 +36,8 @@ Maze::Maze()
     for (int i = 0; i < numWalls; ++i)
     {
         Object *wall = new Object;
-        wall->LoadTexture("brick.ppm");
+        //wall->LoadTexture("brick.ppm");
+        wall->LoadTexture("brick.ppm","normal.ppm");
         objects.push_back(wall);
     }
     // One more object for the floor

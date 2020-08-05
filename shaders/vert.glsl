@@ -9,27 +9,42 @@ layout(location=2)in vec2 texCoord; // Our third attribute - texture coordinates
 layout(location=3)in vec3 tangents; // Our third attribute - texture coordinates.
 layout(location=4)in vec3 bitangents; // Our third attribute - texture coordinates.
 
+// If we have texture coordinates we can now use this as well
+out vec3 FragPos;
+out vec2 v_texCoord;
+//out vec3 myNormal;
+out vec3 TangentLightPos;
+out vec3 TangentViewPos;
+out vec3 TangentFragPos;
+
+
 // If we are applying our camera, then we need to add some uniforms.
 // Note that the syntax nicely matches glm's mat4!
 uniform mat4 model; // Object space
 uniform mat4 view; // Object space
 uniform mat4 projection; // Object space
+uniform vec3 lightPos;
+uniform vec3 viewPos;
 
-// If we have texture coordinates we can now use this as well
-out vec2 v_texCoord;
-out vec3 myNormal;
-out vec3 FragPos;
 
 
 void main()
 {
+	FragPos = vec3(model * vec4(position, 1.0f));
+	mat3 normalMatrix = transpose(inverse(mat3(model)));
+	vec3 T = normalize(normalMatrix * tangents);
+	vec3 N = normalize(normalMatrix * normals);
+	T = normalize(T - dot(T, N) * N);
+	vec3 B = cross(N, T);
+
+	mat3 TBN = transpose(mat3(T, B, N));
+        TangentLightPos = TBN * lightPos;
+        TangentViewPos  = TBN * viewPos;
+        TangentFragPos  = TBN * FragPos;
+
 	gl_Position = projection * view * model * vec4(position, 1.0f);
-
-  	// Store the texture coordinaets which we will output to
-  	// the next stage in the graphics pipeline.
   	v_texCoord = texCoord;
+  	//myNormal = normals;
 
-  	myNormal = normals;
-  	FragPos = vec3(model * vec4(position, 1.0f));
 }
 // ==================================================================

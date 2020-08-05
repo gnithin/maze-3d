@@ -42,7 +42,8 @@ public:
     // Returns an objects transform
     Transform &getTransform();
     // Loads a specific texture
-    void LoadTexture(std::string fileName);
+    void LoadTexture(std::string diffuseFileName);
+    void LoadTexture(std::string diffuseFileName, std::string normalFileName);
 
     CoordMax getBoundingBox();
 
@@ -55,6 +56,7 @@ private:
     Buffer myBuffer;
     // For now we have one diffuse map and one normal map per object
     Texture diffuseMap;
+    Texture normalMap;
     // Store the objects transformations
     Transform transform;
     // Store the 'camera'

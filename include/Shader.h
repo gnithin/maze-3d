@@ -1,12 +1,3 @@
-/** @file Shader.h
- *  @brief Manages the loading, compiling, and linking of vertex and fragment shaders.
- *  
- *  Additionally has functions for setting various uniforms.
- *
- *  @author Mike
- *  @bug No known bugs.
- */
-
 #ifndef SHADER_H
 #define SHADER_H
 
@@ -15,8 +6,7 @@
 #include <fstream>
 #include <glad/glad.h>
 
-class Shader
-{
+class Shader {
 public:
     // Shader constructor
     Shader();
