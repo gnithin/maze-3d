@@ -44,10 +44,11 @@ vec3 calcPointLight(vec3 norm, vec3 diffuseColor, PointLight pointLight);
 
 void main()
 {
+    
     // Compute the normal direction
     //vec3 norm = normalize(myNormal);
-	vec3 norm = texture(u_NormalMap, v_texCoord).rgb;
-	norm = normalize(norm * 2.0 - 1.0);
+    vec3 norm = texture(u_NormalMap, v_texCoord).rgb;
+    norm = normalize(norm * 2.0 - 1.0);
 
     // Store our final texture color
     vec3 diffuseColor;
@@ -58,6 +59,7 @@ void main()
     
     // Final color + "how dark or light to make fragment"
     FragColor = vec4(lightSum, 1.0);
+   
 }
 
 vec3 calcPointLight(vec3 norm, vec3 diffuseColor, PointLight pointLight){
@@ -69,26 +71,29 @@ vec3 calcPointLight(vec3 norm, vec3 diffuseColor, PointLight pointLight){
     // a vector indicating direction
     // Note it is always good to 'normalize' values.
     
-	//vec3 lightDir = normalize(pointLight.lightPos - FragPos);
-	vec3 lightDir = normalize(TangentLightPos - TangentFragPos);    
+    vec3 lightDir = normalize(pointLight.lightPos - FragPos);
+    //vec3 lightDir = normalize(TangentLightPos - TangentFragPos);    
     	
-	// Now we can compute the diffuse light impact
+    // Now we can compute the diffuse light impact
     float diffImpact = max(dot(norm, lightDir), 0.0);
     
-	//vec3 diffuseLight = diffImpact * pointLight.lightColor;
-	vec3 diffuseLight = diffImpact * diffuseColor;
+    vec3 diffuseLight = diffImpact * pointLight.lightColor;
+    //vec3 diffuseLight = diffImpact * diffuseColor;
 
     // (3) Compute Specular lighting
-    //vec3 viewPos = vec3(0.0, 0.0, 0.0);
-    //vec3 viewDir = normalize(viewPos - FragPos);
-	//vec3 reflectDir = reflect(-lightDir, norm);
-	//float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-    //vec3 specular = pointLight.specularStrength * spec * pointLight.lightColor;
+    vec3 viewPos = vec3(0.0, 0.0, 0.0);
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    vec3 specular = pointLight.specularStrength * spec * pointLight.lightColor;
+	
+	/*
 	vec3 viewDir = normalize(TangentViewPos - TangentFragPos);
 	vec3 reflectDir = reflect(-lightDir, norm);
 	vec3 halfwayDir = normalize(lightDir + viewDir);
     float spec = pow(max(dot(norm, halfwayDir), 0.0), 32.0);
     vec3 specular = vec3(0.2) * spec;
+	*/
 
     // Calculate Attenuation here
     // distance and lighting...
