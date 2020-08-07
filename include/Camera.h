@@ -26,8 +26,8 @@ public:
     // camera transformation applied.
     glm::mat4 getWorldToViewmatrix() const;
     // Move the camera around
-    void mouseLook(int mouseX, int mouseY);
-        
+    void mouseLook(int mouseX, int mouseY, int mouseXrel, int mouseYrel);
+           
     void moveForward(float speed);
     void moveBackward(float speed);
     void moveLeft(float speed);

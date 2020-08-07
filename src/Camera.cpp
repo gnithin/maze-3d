@@ -6,7 +6,7 @@
 #include <iostream>
 
 const float UNIT_MOVEMENT = 0.10;
-const float MOUSE_SENSITIVITY = 0.5;
+const float MOUSE_SENSITIVITY = 0.2;
 const float MOUSE_H_THRESHOLD = 0.1;
 const float MOUSE_V_THRESHOLD = 0.5;
 
@@ -16,7 +16,7 @@ Camera &Camera::instance()
     return *instance;
 }
 
-void Camera::mouseLook(int mouseX, int mouseY)
+void Camera::mouseLook(int mouseX, int mouseY, int mouseXrel, int mouseYrel)
 {
     if (oldMousePosition.x == 0 && oldMousePosition.y == 0)
     {
@@ -25,30 +25,15 @@ void Camera::mouseLook(int mouseX, int mouseY)
         return;
     }
 
-    float xdiff = mouseX - oldMousePosition.x;            
-    if (abs(xdiff) > MOUSE_H_THRESHOLD) {
+    if (abs(mouseXrel) > MOUSE_H_THRESHOLD) {
         oldMousePosition.x = mouseX;
-        if (xdiff > 0) {            
+        if (mouseXrel > 0) {
             lookRight(MOUSE_SENSITIVITY);
         }
-        else if (xdiff < 0) {            
+        else if (mouseXrel < 0) {
             lookLeft(MOUSE_SENSITIVITY);
         }
     }
-
-    float ydiff = mouseY - oldMousePosition.y;
-    if (abs(ydiff) > MOUSE_V_THRESHOLD) {
-
-        oldMousePosition.y = mouseY;
-
-        if (ydiff > 0) {
-            lookUp(MOUSE_SENSITIVITY);
-        }
-        else if (ydiff < 0) {
-            lookDown(MOUSE_SENSITIVITY);
-        }
-    }
-
 }
 
 void Camera::moveOnXZ(float newPositionX, float newPositionZ) {

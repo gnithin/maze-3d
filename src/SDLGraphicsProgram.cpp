@@ -56,6 +56,9 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h) : screenWidth(w), screenHei
             success = false;
         }
 
+
+        SDL_SetRelativeMouseMode(SDL_TRUE);
+
         // Initialize GLAD Library
         if (!gladLoadGLLoader(SDL_GL_GetProcAddress))
         {
@@ -162,7 +165,7 @@ void SDLGraphicsProgram::loop()
 
     // Set a default speed for the camera
     float cameraSpeed = 1.0f;
-
+    
     // While application is running
     while (!quit)
     {
@@ -175,13 +178,39 @@ void SDLGraphicsProgram::loop()
             {
                 quit = true;
             }
+
+            /*
+            if (e.type == SDL_WINDOWEVENT) {
+                if (e.window.event == SDL_WINDOWEVENT_LEAVE) {
+                    //std::cout << "out of window, pre xrel = " << preXrel;
+                    autoTurningFlag = true;
+                }
+                else if (e.window.event == SDL_WINDOWEVENT_ENTER) {
+                    //std::cout << "return in window, pre xrel = " << preXrel;
+                    autoTurningFlag = false;
+                }
+            }
+
+            if (autoTurningFlag) {
+                Camera::instance().mouseLook(preXrel, preYrel);
+            }*/
+
             // Handle keyboad input for the camera class
             if (e.type == SDL_MOUSEMOTION)
             {
                 // Handle mouse movements
                 int mouseX = e.motion.x;
-                int mouseY = e.motion.y;
-                Camera::instance().mouseLook(mouseX, mouseY);
+                int mouseY = e.motion.y;  
+
+                //std::cout << mouseX << "\n";
+    
+                int mouseX_rel = e.motion.xrel;
+                //preXrel = mouseX_rel;
+                int mouseY_rel = e.motion.yrel;
+                //preYrel = mouseY_rel;
+                
+                //Camera::instance().mouseLook(mouseX, mouseY);
+                Camera::instance().mouseLook(mouseX, mouseY, mouseX_rel, mouseY_rel);
             }
             switch (e.type)
             {
@@ -217,10 +246,12 @@ void SDLGraphicsProgram::loop()
                     Camera::instance().moveBackward(cameraSpeed);
                     break;
                 case SDLK_q:
-                    Camera::instance().lookLeft(cameraSpeed);
+                    //Camera::instance().lookLeft(cameraSpeed);
+                    Camera::instance().lookUp(cameraSpeed);
                     break;
                 case SDLK_e:
-                    Camera::instance().lookRight(cameraSpeed);
+                    //Camera::instance().lookRight(cameraSpeed);
+                    Camera::instance().lookDown(cameraSpeed);
                     break;
                 }
                 break;
