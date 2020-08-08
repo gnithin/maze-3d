@@ -72,14 +72,7 @@ private:
     // OpenGL context
     SDL_GLContext gContext;
     // Maze object
-    Maze* maze;
-
-    //mouse view:
-    /*
-    int preXrel = 0;
-    int preYrel = 0;
-    bool autoTurningFlag = false;
-    */
+    Maze *maze;
 };
 
 #endif

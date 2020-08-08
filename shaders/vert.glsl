@@ -31,7 +31,6 @@ void main()
 {
     /* add */
     FragPos = vec3(modelTransformMatrix * vec4(position, 1.0));
-    //v_texCoord = texCoord
     
     mat3 normalMatrix = transpose(inverse(mat3(modelTransformMatrix)));
     vec3 T = normalize(normalMatrix * tangents);
@@ -44,8 +43,6 @@ void main()
     TangentViewPos  = TBN * viewPos;
     TangentFragPos  = TBN * FragPos;
     
-
-	//gl_Position = projectionMatrix * modelTransformMatrix * vec4(position, 1.0f);
 	gl_Position = projectionMatrix * view * modelTransformMatrix * vec4(position, 1.0f);
 
 
