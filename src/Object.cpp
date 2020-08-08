@@ -40,6 +40,10 @@ Object::Object()
     init();
 }
 
+Object::Object(int dummy)
+{
+}
+
 Object::~Object()
 {
 }
