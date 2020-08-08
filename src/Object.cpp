@@ -120,44 +120,35 @@ void Object::Bind()
     myShader.Bind();
 }
 
-void Object::update(unsigned int screenWidth, unsigned int screenHeight)
-{
+void Object::update(unsigned int screenWidth, unsigned int screenHeight){
     Bind();
-    // TODO: Read and understand
-    // For our object, we apply the texture in the following way
-    // Note that we set the value to 0, because we have bound
-    // our texture to slot 0.
+
     myShader.setUniform1i("u_DiffuseMap", 0);
-    // If we want to load another texture, we assign it to another slot
+
     myShader.setUniform1i("u_NormalMap", 1);
-    // Here we apply the 'view' matrix which creates perspective.
-    // The first argument is 'field of view'
-    // Then perspective
-    // Then the near and far clipping plane.
-    // Note I cannot see anything closer than 0.1f units from the screen.
-    // TODO: In the future this type of operation would be abstracted away
-    //       in a camera class.
+
     projectionMatrix = glm::perspective(45.0f, ((float)screenWidth) / ((float)screenHeight), 0.1f, 20.0f);
     // Set the uniforms in our current shader
 
     // Set the MVP Matrix for our object
     // Send it into our shader
-    myShader.setUniformMatrix4fv("model", &transform.getInternalMatrix()[0][0]);
+    myShader.setUniformMatrix4fv("modelTransformMatrix", transform.getTransformMatrix());
     myShader.setUniformMatrix4fv("view", &Camera::instance().getWorldToViewmatrix()[0][0]);
-    myShader.setUniformMatrix4fv("projection", &projectionMatrix[0][0]);
-
-    myShader.setUniform3f("lightPos", 5.0f, 20.0f, 10.0f);//same as pointLights[0].lightPos
+    myShader.setUniformMatrix4fv("projectionMatrix", &projectionMatrix[0][0]);
+    
+    myShader.setUniform3f("lightPos", Camera::instance().getEyeXPosition(), Camera::instance().getEyeYPosition(), Camera::instance().getEyeZPosition());
     myShader.setUniform3f("viewPos", Camera::instance().getEyeXPosition(), Camera::instance().getEyeYPosition(), Camera::instance().getEyeZPosition());
-
-    // Create a first 'light'
-    myShader.setUniform3f("pointLights[0].lightColor", 0.8f, 0.9f, 0.8f);
-    myShader.setUniform3f("pointLights[0].lightPos", 5.0f, 20.0f, 10.0f);
-    myShader.setUniform1f("pointLights[0].ambientIntensity", 0.9f);
-    myShader.setUniform1f("pointLights[0].specularStrength", 0.0f);
+ 
+   // Create a first 'light'
+    myShader.setUniform3f("pointLights[0].lightColor", 1.0f, 1.0f, 1.0f);
+    myShader.setUniform3f("pointLights[0].lightPos", Camera::instance().getEyeXPosition(), Camera::instance().getEyeYPosition(), Camera::instance().getEyeZPosition());
+    myShader.setUniform1f("pointLights[0].ambientIntensity", 0.5f);
+    myShader.setUniform1f("pointLights[0].specularStrength", 0.4f);
     myShader.setUniform1f("pointLights[0].constant", 1.0f);
     myShader.setUniform1f("pointLights[0].linear", 0.09f);
-    myShader.setUniform1f("pointLights[0].attentuateFactor", 0.0f);
+    myShader.setUniform1f("pointLights[0].attentuateFactor", 0.5f);
     myShader.setUniform1f("pointLights[0].quadratic", 0.032f);
+
 }
 
 void Object::render()
