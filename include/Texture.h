@@ -26,11 +26,11 @@ public:
     // slot tells us which slot we want to bind to.
     // We can have multiple slots. By default, we
     // will set our slot to 0 if it is not specified.
-    void Bind(unsigned int slot = 0) const;
+    virtual void Bind(unsigned int slot = 0) const;
     // Be done with our texture
-    void Unbind();
+    virtual void Unbind();
 
-private:
+protected:
     // Store a unique ID for the texture
     GLuint m_TextureID;
     // Filepath to the image loaded
