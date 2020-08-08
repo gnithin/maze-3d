@@ -144,7 +144,7 @@ bool Shader::CheckLinkStatus(GLuint programID)
 #else
   // Link our shaders
   // id is the type of shader (Vertex, fragment, etc.)
-  
+
   // fix error: uninitialize local var:
   unsigned int id = 0;
 

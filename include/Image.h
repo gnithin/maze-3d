@@ -54,8 +54,7 @@ private:
     int m_BPP{0};            // Bits per pixel (i.e. how colorful are our pixels)
     std::string magicNumber; // magicNumber if any for image format
 
-    std::vector<std::string>splitStrings(std::string line);
-
+    std::vector<std::string> splitStrings(std::string line);
 };
 
 #endif

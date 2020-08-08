@@ -25,18 +25,22 @@ void Camera::mouseLook(int mouseX, int mouseY, int mouseXrel, int mouseYrel)
         return;
     }
 
-    if (abs(mouseXrel) > MOUSE_H_THRESHOLD) {
+    if (abs(mouseXrel) > MOUSE_H_THRESHOLD)
+    {
         oldMousePosition.x = mouseX;
-        if (mouseXrel > 0) {
+        if (mouseXrel > 0)
+        {
             lookRight(MOUSE_SENSITIVITY);
         }
-        else if (mouseXrel < 0) {
+        else if (mouseXrel < 0)
+        {
             lookLeft(MOUSE_SENSITIVITY);
         }
     }
 }
 
-void Camera::moveOnXZ(float newPositionX, float newPositionZ) {
+void Camera::moveOnXZ(float newPositionX, float newPositionZ)
+{
     if (!maze->isOnTheWall(newPositionX, eyePosition[1], newPositionZ))
     {
         eyePosition[0] = newPositionX;
@@ -49,7 +53,6 @@ void Camera::moveForward(float speed)
     //float newPosition = eyePosition[2] - UNIT_MOVEMENT;
     float newPositionX = eyePosition[0] + speed * UNIT_MOVEMENT * cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     float newPositionZ = eyePosition[2] + speed * UNIT_MOVEMENT * sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-       
 
     moveOnXZ(newPositionX, newPositionZ);
 }
@@ -91,51 +94,60 @@ void Camera::moveDown(float speed)
     eyePosition[1] -= UNIT_MOVEMENT;
 }
 
-void Camera::setLookDirection() {
+void Camera::setLookDirection()
+{
     viewDirection.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     viewDirection.y = sin(glm::radians(pitch));
     viewDirection.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 }
 
-void Camera::lookLeft(float speed) {
+void Camera::lookLeft(float speed)
+{
 
     float xdiff = -2.0f * speed;
     yaw += xdiff;
     setLookDirection();
 }
 
-void Camera::lookRight(float speed) {
+void Camera::lookRight(float speed)
+{
 
     float xdiff = 2.0f * speed;
     yaw += xdiff;
     setLookDirection();
 }
 
-void Camera::lookDown(float speed) {
-    
-    float ydiff = 0.5f * speed;    
+void Camera::lookDown(float speed)
+{
+
+    float ydiff = 0.5f * speed;
     pitch += ydiff;
 
-    if (pitch > 89.0f) {
+    if (pitch > 89.0f)
+    {
         pitch = 89.0f;
     }
-    else if (pitch < -89.0f) {
+    else if (pitch < -89.0f)
+    {
         pitch = -89.0f;
     }
 
     setLookDirection();
 }
 
-void Camera::lookUp(float speed) {
+void Camera::lookUp(float speed)
+{
 
     float ydiff = -0.5f * speed;
-        
+
     pitch += ydiff;
 
-    if (pitch > 89.0f) {
+    if (pitch > 89.0f)
+    {
         pitch = 89.0f;
     }
-    else if (pitch < -89.0f) {
+    else if (pitch < -89.0f)
+    {
         pitch = -89.0f;
     }
 

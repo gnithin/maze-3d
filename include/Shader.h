@@ -6,7 +6,8 @@
 #include <fstream>
 #include <glad/glad.h>
 
-class Shader {
+class Shader
+{
 public:
     // Shader constructor
     Shader();
