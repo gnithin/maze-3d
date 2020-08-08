@@ -68,7 +68,7 @@ void Maze::update(int screenWidth, int screenHeight)
         for (int j = 0; j < mazeMatrix.size(); j += 1)
         {
             MazePoint curr = mazeMatrix[i][j];
-            if (curr.up == 1 || curr.down == 1)
+            if (curr.up == 1)
             {
                 // Vertical walls
                 currWallIndex += 1;
@@ -79,14 +79,26 @@ void Maze::update(int screenWidth, int screenHeight)
                     0.0f,
                     i);
                 float rotDirn = 90.0f;
-                if (curr.down == 1)
-                {
-                    rotDirn = -90.0f;
-                }
                 currWall->getTransform().rotate(glm::radians(rotDirn), 0.0f, 1.0f, 0.0f);
                 currWall->update(screenWidth, screenHeight);
             }
-            if (curr.right == 1 || curr.left == 1)
+
+            if (curr.down == 1)
+            {
+                // Vertical walls
+                currWallIndex += 1;
+                Object *currWall = objects[currWallIndex];
+                currWall->getTransform().loadIdentity();
+                currWall->getTransform().translate(
+                    j,
+                    0.0f,
+                    i);
+                float rotDirn = -90.0f;
+                currWall->getTransform().rotate(glm::radians(rotDirn), 0.0f, 1.0f, 0.0f);
+                currWall->update(screenWidth, screenHeight);
+            }
+
+            if (curr.left == 1)
             {
                 // Horizontal walls
                 currWallIndex += 1;
@@ -96,11 +108,20 @@ void Maze::update(int screenWidth, int screenHeight)
                     j,
                     0.0f,
                     i);
+                currWall->getTransform().rotate(glm::radians(180.f), 0.0f, 1.0f, 0.0f);
+                currWall->update(screenWidth, screenHeight);
+            }
 
-                if (curr.left == 1)
-                {
-                    currWall->getTransform().rotate(glm::radians(180.f), 0.0f, 1.0f, 0.0f);
-                }
+            if (curr.right == 1)
+            {
+                // Horizontal walls
+                currWallIndex += 1;
+                Object *currWall = objects[currWallIndex];
+                currWall->getTransform().loadIdentity();
+                currWall->getTransform().translate(
+                    j,
+                    0.0f,
+                    i);
                 currWall->update(screenWidth, screenHeight);
             }
         }
