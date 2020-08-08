@@ -6,7 +6,7 @@
 #include <iostream>
 
 const float UNIT_MOVEMENT = 0.10;
-const float MOUSE_SENSITIVITY = 0.9;
+const float MOUSE_SENSITIVITY = 1.75f;
 const float MOUSE_H_THRESHOLD = 0.1;
 const float MOUSE_V_THRESHOLD = 0.5;
 
