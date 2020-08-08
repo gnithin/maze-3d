@@ -29,16 +29,18 @@
 class Object
 {
 public:
-    // Object Constructor
+    // Object Default Constructor
     Object();
+    // Object Constructor
+    Object(int dummyArg);
     // Object destructor
     ~Object();
     // Initialization routine
     void init();
     // Updates and transformatinos applied to object
-    void update(unsigned int screenWidth, unsigned int screenHeight);
+    virtual void update(unsigned int screenWidth, unsigned int screenHeight);
     // How to draw the object
-    void render();
+    virtual void render();
     // Returns an objects transform
     Transform &getTransform();
     // Loads a specific texture
@@ -47,7 +49,7 @@ public:
 
     CoordMax getBoundingBox();
 
-private:
+protected:
     // Helper method for when we are ready to draw or update our object
     void Bind();
     // For now we have one shader per object.

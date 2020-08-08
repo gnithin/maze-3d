@@ -90,6 +90,17 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h) : screenWidth(w), screenHei
 
     // Setup the maze
     maze = Maze::instance();
+
+    skyCubeObject = new SkyCubeObject();
+
+    std::vector<std::string> faceFileNames = {
+        "resources/skycube/right.jpg",
+        "resources/skycube/left.jpg",
+        "resources/skycube/top.jpg",
+        "resources/skycube/bottom.jpg",
+        "resources/skycube/back.jpg",
+        "resources/skycube/front.jpg"};
+    skyCubeObject->LoadTextures(faceFileNames);
 }
 
 // Proper shutdown of SDL and destroy initialized objects
@@ -117,6 +128,7 @@ bool SDLGraphicsProgram::initGL()
 void SDLGraphicsProgram::update()
 {
     maze->update(screenWidth, screenHeight);
+    skyCubeObject->update(screenWidth, screenHeight);
 }
 
 // Render
@@ -144,6 +156,9 @@ void SDLGraphicsProgram::render()
     // Nice way to debug your scene in wireframe!
     //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
+    // NOTE: Purposefully rendering the sky-cub before the maze
+    // Reference - https://stackoverflow.com/a/2859795/1518924
+    skyCubeObject->render();
     maze->render();
 
     // Delay to slow things down just a bit!

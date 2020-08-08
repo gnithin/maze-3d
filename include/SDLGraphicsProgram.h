@@ -37,6 +37,7 @@
 #include "Buffer.h"
 #include "Object.h"
 #include "maze.h"
+#include "skyCubeObject.h"
 
 // Purpose:
 // This class sets up a full graphics program using SDL
@@ -73,6 +74,8 @@ private:
     SDL_GLContext gContext;
     // Maze object
     Maze *maze;
+    // Sky cube;
+    SkyCubeObject *skyCubeObject;
 };
 
 #endif
