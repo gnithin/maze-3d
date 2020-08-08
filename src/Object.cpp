@@ -50,10 +50,11 @@ Object::~Object()
 void Object::LoadTexture(std::string fileName)
 {
     // Load our actual textures
-    diffuseMap.LoadTexture(fileName);    
+    diffuseMap.LoadTexture(fileName);
 }
 
-void Object::LoadTexture(std::string diffuseFileName, std::string normalFileName) {
+void Object::LoadTexture(std::string diffuseFileName, std::string normalFileName)
+{
     diffuseMap.LoadTexture(diffuseFileName);
     normalMap.LoadTexture(normalFileName);
 }
@@ -120,7 +121,8 @@ void Object::Bind()
     myShader.Bind();
 }
 
-void Object::update(unsigned int screenWidth, unsigned int screenHeight){
+void Object::update(unsigned int screenWidth, unsigned int screenHeight)
+{
     Bind();
 
     myShader.setUniform1i("u_DiffuseMap", 0);
@@ -135,20 +137,19 @@ void Object::update(unsigned int screenWidth, unsigned int screenHeight){
     myShader.setUniformMatrix4fv("modelTransformMatrix", transform.getTransformMatrix());
     myShader.setUniformMatrix4fv("view", &Camera::instance().getWorldToViewmatrix()[0][0]);
     myShader.setUniformMatrix4fv("projectionMatrix", &projectionMatrix[0][0]);
-    
+
     myShader.setUniform3f("lightPos", Camera::instance().getEyeXPosition(), Camera::instance().getEyeYPosition(), Camera::instance().getEyeZPosition());
     myShader.setUniform3f("viewPos", Camera::instance().getEyeXPosition(), Camera::instance().getEyeYPosition(), Camera::instance().getEyeZPosition());
- 
-   // Create a first 'light'
+
+    // Create a first 'light'
     myShader.setUniform3f("pointLights[0].lightColor", 1.0f, 1.0f, 1.0f);
-    myShader.setUniform3f("pointLights[0].lightPos", Camera::instance().getEyeXPosition(), Camera::instance().getEyeYPosition(), Camera::instance().getEyeZPosition());
-    myShader.setUniform1f("pointLights[0].ambientIntensity", 0.5f);
+    myShader.setUniform3f("pointLights[0].lightPos", 1.0f, 5.0f, 5.0f);
+    myShader.setUniform1f("pointLights[0].ambientIntensity", 0.6f);
     myShader.setUniform1f("pointLights[0].specularStrength", 0.4f);
     myShader.setUniform1f("pointLights[0].constant", 1.0f);
-    myShader.setUniform1f("pointLights[0].linear", 0.09f);
-    myShader.setUniform1f("pointLights[0].attentuateFactor", 0.5f);
-    myShader.setUniform1f("pointLights[0].quadratic", 0.032f);
-
+    myShader.setUniform1f("pointLights[0].linear", 0.00f);
+    myShader.setUniform1f("pointLights[0].attentuateFactor", 0.0f);
+    myShader.setUniform1f("pointLights[0].quadratic", 0.00f);
 }
 
 void Object::render()
