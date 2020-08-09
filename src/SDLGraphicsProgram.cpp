@@ -224,8 +224,8 @@ void SDLGraphicsProgram::loop()
                     Camera::instance().lookDown(cameraSpeed);
                     break;
                 case SDLK_p:
-                    std::cout << "Peeking!" << std::endl;
                     keyControlsManager->isPeekMode = !keyControlsManager->isPeekMode;
+                    Camera::instance().togglePeek();
                     break;
                 }
                 break;

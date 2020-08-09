@@ -2,6 +2,7 @@
 
 #include "glm/gtx/transform.hpp"
 #include "mazeGenerator.h"
+#include "keyControlsManager.h"
 
 #include <iostream>
 
@@ -9,6 +10,9 @@ const float UNIT_MOVEMENT = 0.10;
 const float MOUSE_SENSITIVITY = 1.75f;
 const float MOUSE_H_THRESHOLD = 0.1;
 const float MOUSE_V_THRESHOLD = 0.5;
+
+const float REGULAR_HEIGHT = 0.5f;
+const float PEEK_HEIGHT = 2.5f;
 
 Camera &Camera::instance()
 {
@@ -92,6 +96,16 @@ void Camera::moveUp(float speed)
 void Camera::moveDown(float speed)
 {
     eyePosition[1] -= UNIT_MOVEMENT;
+}
+
+void Camera::togglePeek()
+{
+    float height = REGULAR_HEIGHT;
+    if ((KeyControlsManager::instance())->isPeekMode)
+    {
+        height = PEEK_HEIGHT;
+    }
+    eyePosition[1] = height;
 }
 
 void Camera::setLookDirection()
@@ -192,9 +206,15 @@ Camera::Camera()
     generator->getStartingIndex(&i, &j);
 
     float delta = 0.5f;
+    float height = REGULAR_HEIGHT;
+    if ((KeyControlsManager::instance())->isPeekMode)
+    {
+        height = PEEK_HEIGHT;
+    }
+
     eyePosition = glm::vec3(
         (j * 1.0f) - delta,
-        0.5f,
+        height,
         (i * 1.0f));
     // Looking down along the z-axis initially.
     // Remember, this is negative because we are looking 'into' the scene.
