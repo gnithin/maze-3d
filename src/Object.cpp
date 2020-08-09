@@ -147,7 +147,7 @@ void Object::update(unsigned int screenWidth, unsigned int screenHeight)
 
     // Create a first 'light'
     myShader.setUniform3f("pointLights[0].lightColor", 1.0f, 0.83f, 0.60f);
-    myShader.setUniform3f("pointLights[0].lightPos", 1.0f, 5.0f, 5.0f);
+    myShader.setUniform3f("pointLights[0].lightPos", 3.0f, 4.0f, 11.0f);
     myShader.setUniform1f("pointLights[0].ambientIntensity", 0.6f);
     myShader.setUniform1f("pointLights[0].specularStrength", 0.4f);
     myShader.setUniform1f("pointLights[0].constant", 1.0f);
