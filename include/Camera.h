@@ -52,6 +52,8 @@ public:
     float getViewYDirection();
     float getViewZDirection();
 
+    void togglePeek();
+
 private:
     // Track the old mouse position
     glm::vec2 oldMousePosition;

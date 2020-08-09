@@ -1,6 +1,7 @@
 #include "SDLGraphicsProgram.h"
 #include "Camera.h"
 #include "maze.h"
+#include "keyControlsManager.h"
 
 #define OBJECTS 4
 
@@ -168,9 +169,6 @@ void SDLGraphicsProgram::render()
 //Loops forever!
 void SDLGraphicsProgram::loop()
 {
-    // Main loop flag
-    bool quit = false;
-
     // Event handler that handles various events in SDL
     // that are related to input and output
     SDL_Event e;
@@ -179,18 +177,22 @@ void SDLGraphicsProgram::loop()
 
     // Set a default speed for the camera
     float cameraSpeed = 1.0f;
+    float verticalCameraSpeed = cameraSpeed * 10.0f;
+
+    KeyControlsManager *keyControlsManager = KeyControlsManager::instance();
 
     // While application is running
-    while (!quit)
+    while (!keyControlsManager->shouldQuit)
     {
         //Handle events on queue
         while (SDL_PollEvent(&e) != 0)
         {
+            bool isPeekMode = keyControlsManager->isPeekMode;
             // User posts an event to quit
             // An example is hitting the "x" in the corner of the window.
             if (e.type == SDL_QUIT)
             {
-                quit = true;
+                keyControlsManager->shouldQuit = true;
             }
 
             // Handle keyboad input for the camera class
@@ -205,6 +207,8 @@ void SDLGraphicsProgram::loop()
 
                 Camera::instance().mouseLook(mouseX, mouseY, mouseX_rel, mouseY_rel);
             }
+
+            // Common keyboard events
             switch (e.type)
             {
             // Handle keyboard presses
@@ -212,41 +216,62 @@ void SDLGraphicsProgram::loop()
                 switch (e.key.keysym.sym)
                 {
                 case SDLK_ESCAPE:
-                    quit = true;
-                    break;
-                case SDLK_LEFT:
-                    Camera::instance().moveLeft(cameraSpeed);
-                    break;
-                case SDLK_RIGHT:
-                    Camera::instance().moveRight(cameraSpeed);
-                    break;
-                case SDLK_UP:
-                    Camera::instance().moveForward(cameraSpeed);
-                    break;
-                case SDLK_DOWN:
-                    Camera::instance().moveBackward(cameraSpeed);
-                    break;
-                case SDLK_a:
-                    Camera::instance().moveLeft(cameraSpeed);
-                    break;
-                case SDLK_d:
-                    Camera::instance().moveRight(cameraSpeed);
-                    break;
-                case SDLK_w:
-                    Camera::instance().moveForward(cameraSpeed);
-                    break;
-                case SDLK_s:
-                    Camera::instance().moveBackward(cameraSpeed);
+                    keyControlsManager->shouldQuit = true;
                     break;
                 case SDLK_q:
-                    Camera::instance().lookUp(cameraSpeed);
+                    Camera::instance().lookUp(verticalCameraSpeed);
                     break;
                 case SDLK_e:
-                    Camera::instance().lookDown(cameraSpeed);
+                    Camera::instance().lookDown(verticalCameraSpeed);
+                    break;
+                case SDLK_p:
+                    keyControlsManager->isPeekMode = !keyControlsManager->isPeekMode;
+                    Camera::instance().togglePeek();
                     break;
                 }
                 break;
             }
+
+            if (!isPeekMode)
+            {
+                switch (e.type)
+                {
+                // Handle keyboard presses
+                case SDL_KEYDOWN:
+                    switch (e.key.keysym.sym)
+                    {
+                    case SDLK_LEFT:
+                        Camera::instance().moveLeft(cameraSpeed);
+                        break;
+                    case SDLK_RIGHT:
+                        Camera::instance().moveRight(cameraSpeed);
+                        break;
+                    case SDLK_UP:
+                        Camera::instance().moveForward(cameraSpeed);
+                        break;
+                    case SDLK_DOWN:
+                        Camera::instance().moveBackward(cameraSpeed);
+                        break;
+                    case SDLK_a:
+                        Camera::instance().moveLeft(cameraSpeed);
+                        break;
+                    case SDLK_d:
+                        Camera::instance().moveRight(cameraSpeed);
+                        break;
+                    case SDLK_w:
+                        Camera::instance().moveForward(cameraSpeed);
+                        break;
+                    case SDLK_s:
+                        Camera::instance().moveBackward(cameraSpeed);
+                        break;
+                    case SDLK_q:
+                        Camera::instance().lookUp(cameraSpeed);
+                        break;
+                    }
+                    break;
+                }
+            }
+
         } // End SDL_PollEvent loop.
 
         // Update our scene
