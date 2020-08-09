@@ -6,7 +6,11 @@
 
 #include <iostream>
 
-const float UNIT_MOVEMENT = 0.10;
+// Set a default speed for the camera
+const float CAMERA_SPEED = 0.5f;
+const float VERTICAL_CAMERA_SPEED = CAMERA_SPEED * 7.0f;
+
+const float UNIT_MOVEMENT = 0.075f;
 const float MOUSE_SENSITIVITY = 1.75f;
 const float MOUSE_H_THRESHOLD = 0.1;
 const float MOUSE_V_THRESHOLD = 0.5;
@@ -251,4 +255,38 @@ glm::mat4 Camera::getWorldToViewmatrix() const
     return glm::lookAt(eyePosition,
                        eyePosition + viewDirection,
                        upVector);
+}
+
+void Camera::update()
+{
+    KeyControlsManager *keyManager = KeyControlsManager::instance();
+    if (keyManager->isMovingForward)
+    {
+        moveForward(CAMERA_SPEED);
+    }
+
+    if (keyManager->isMovingBackward)
+    {
+        moveBackward(CAMERA_SPEED);
+    }
+
+    if (keyManager->isMovingRight)
+    {
+        moveRight(CAMERA_SPEED);
+    }
+
+    if (keyManager->isMovingLeft)
+    {
+        moveLeft(CAMERA_SPEED);
+    }
+
+    if (keyManager->isLookingUp)
+    {
+        lookUp(VERTICAL_CAMERA_SPEED);
+    }
+
+    if (keyManager->isLookingDown)
+    {
+        lookDown(VERTICAL_CAMERA_SPEED);
+    }
 }

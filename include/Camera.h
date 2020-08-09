@@ -54,6 +54,8 @@ public:
 
     void togglePeek();
 
+    void update();
+
 private:
     // Track the old mouse position
     glm::vec2 oldMousePosition;

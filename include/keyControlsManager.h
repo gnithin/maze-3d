@@ -13,11 +13,27 @@ public:
     bool shouldQuit;
     bool isPeekMode;
 
+    bool isMovingForward;
+    bool isMovingBackward;
+    bool isMovingLeft;
+    bool isMovingRight;
+
+    bool isLookingUp;
+    bool isLookingDown;
+
 private:
     KeyControlsManager()
     {
         shouldQuit = false;
         isPeekMode = false;
+
+        isMovingForward = false;
+        isMovingBackward = false;
+        isMovingLeft = false;
+        isMovingRight = false;
+
+        isLookingUp = false;
+        isLookingDown = false;
     }
 };
 
