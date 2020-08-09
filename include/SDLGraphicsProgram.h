@@ -65,6 +65,8 @@ public:
     void getOpenGLVersionInfo();
 
 private:
+    void handleKeyInput(SDL_Event *e);
+
     // Screen dimension constants
     int screenHeight;
     int screenWidth;

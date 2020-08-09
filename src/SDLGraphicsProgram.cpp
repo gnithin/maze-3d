@@ -3,7 +3,9 @@
 #include "maze.h"
 #include "keyControlsManager.h"
 
-#define OBJECTS 4
+// Set a default speed for the camera
+const float CAMERA_SPEED = 1.0f;
+const float VERTICAL_CAMERA_SPEED = CAMERA_SPEED * 10.0f;
 
 // Initialization function
 // Returns a true or false value based on successful completion of setup.
@@ -171,10 +173,6 @@ void SDLGraphicsProgram::loop()
     // Enable text input
     SDL_StartTextInput();
 
-    // Set a default speed for the camera
-    float cameraSpeed = 1.0f;
-    float verticalCameraSpeed = cameraSpeed * 10.0f;
-
     KeyControlsManager *keyControlsManager = KeyControlsManager::instance();
 
     // While application is running
@@ -183,99 +181,7 @@ void SDLGraphicsProgram::loop()
         //Handle events on queue
         while (SDL_PollEvent(&e) != 0)
         {
-            bool isPeekMode = keyControlsManager->isPeekMode;
-            // User posts an event to quit
-            // An example is hitting the "x" in the corner of the window.
-            if (e.type == SDL_QUIT)
-            {
-                keyControlsManager->shouldQuit = true;
-            }
-
-            // Handle keyboad input for the camera class
-            if (e.type == SDL_MOUSEMOTION)
-            {
-                // Handle mouse movements
-                int mouseX = e.motion.x;
-                int mouseY = e.motion.y;
-
-                int mouseX_rel = e.motion.xrel;
-                int mouseY_rel = e.motion.yrel;
-
-                Camera::instance().mouseLook(mouseX, mouseY, mouseX_rel, mouseY_rel);
-            }
-
-            // Common keyboard events
-            switch (e.type)
-            {
-            // Handle keyboard presses
-            case SDL_KEYDOWN:
-                switch (e.key.keysym.sym)
-                {
-                case SDLK_ESCAPE:
-                    keyControlsManager->shouldQuit = true;
-                    break;
-                case SDLK_q:
-                    Camera::instance().lookUp(verticalCameraSpeed);
-                    break;
-                case SDLK_e:
-                    Camera::instance().lookDown(verticalCameraSpeed);
-                    break;
-                case SDLK_p:
-                    keyControlsManager->isPeekMode = !keyControlsManager->isPeekMode;
-                    Camera::instance().togglePeek();
-                    break;
-                }
-                break;
-            }
-
-            if (!isPeekMode)
-            {
-                switch (e.type)
-                {
-                // Handle keyboard presses
-                case SDL_KEYDOWN:
-                    switch (e.key.keysym.sym)
-                    {
-                    case SDLK_LEFT:
-                        Camera::instance().moveLeft(cameraSpeed);
-                        break;
-                    case SDLK_RIGHT:
-                        Camera::instance().moveRight(cameraSpeed);
-                        break;
-                    case SDLK_UP:
-                        Camera::instance().moveForward(cameraSpeed);
-                        break;
-                    case SDLK_DOWN:
-                        Camera::instance().moveBackward(cameraSpeed);
-                        break;
-                    case SDLK_a:
-                        Camera::instance().moveLeft(cameraSpeed);
-                        break;
-                    case SDLK_d:
-                        Camera::instance().moveRight(cameraSpeed);
-                        break;
-                    case SDLK_w:
-                        Camera::instance().moveForward(cameraSpeed);
-                        break;
-                    case SDLK_s:
-                        Camera::instance().moveBackward(cameraSpeed);
-                        break;
-                    case SDLK_q:
-                        Camera::instance().lookUp(cameraSpeed);
-                        break;
-                    }
-                    break;
-                case SDL_KEYUP:
-                    switch (e.key.keysym.sym)
-                    {
-                    case SDLK_w:
-                        keyControlsManager->isMovingForward = false;
-                        break;
-                    }
-                    break;
-                }
-            }
-
+            handleKeyInput(&e);
         } // End SDL_PollEvent loop.
 
         // Update our scene
@@ -306,4 +212,102 @@ void SDLGraphicsProgram::getOpenGLVersionInfo()
     SDL_Log("Renderer: %s", (const char *)glGetString(GL_RENDERER));
     SDL_Log("Version: %s", (const char *)glGetString(GL_VERSION));
     SDL_Log("Shading language: %s", (const char *)glGetString(GL_SHADING_LANGUAGE_VERSION));
+}
+
+void SDLGraphicsProgram::handleKeyInput(SDL_Event *e)
+{
+    KeyControlsManager *keyControlsManager = KeyControlsManager::instance();
+    bool isPeekMode = keyControlsManager->isPeekMode;
+
+    // User posts an event to quit
+    // An example is hitting the "x" in the corner of the window.
+    if (e->type == SDL_QUIT)
+    {
+        keyControlsManager->shouldQuit = true;
+    }
+
+    // Handle keyboad input for the camera class
+    if (e->type == SDL_MOUSEMOTION)
+    {
+        // Handle mouse movements
+        int mouseX = e->motion.x;
+        int mouseY = e->motion.y;
+
+        int mouseX_rel = e->motion.xrel;
+        int mouseY_rel = e->motion.yrel;
+
+        Camera::instance().mouseLook(mouseX, mouseY, mouseX_rel, mouseY_rel);
+    }
+
+    // Common keyboard events
+    switch (e->type)
+    {
+    // Handle keyboard presses
+    case SDL_KEYDOWN:
+        switch (e->key.keysym.sym)
+        {
+        case SDLK_ESCAPE:
+            keyControlsManager->shouldQuit = true;
+            break;
+        case SDLK_q:
+            Camera::instance().lookUp(VERTICAL_CAMERA_SPEED);
+            break;
+        case SDLK_e:
+            Camera::instance().lookDown(VERTICAL_CAMERA_SPEED);
+            break;
+        case SDLK_p:
+            keyControlsManager->isPeekMode = !keyControlsManager->isPeekMode;
+            Camera::instance().togglePeek();
+            break;
+        }
+        break;
+    }
+
+    if (!isPeekMode)
+    {
+        switch (e->type)
+        {
+        // Handle keyboard presses
+        case SDL_KEYDOWN:
+            switch (e->key.keysym.sym)
+            {
+            case SDLK_LEFT:
+                Camera::instance().moveLeft(CAMERA_SPEED);
+                break;
+            case SDLK_RIGHT:
+                Camera::instance().moveRight(CAMERA_SPEED);
+                break;
+            case SDLK_UP:
+                Camera::instance().moveForward(CAMERA_SPEED);
+                break;
+            case SDLK_DOWN:
+                Camera::instance().moveBackward(CAMERA_SPEED);
+                break;
+            case SDLK_a:
+                Camera::instance().moveLeft(CAMERA_SPEED);
+                break;
+            case SDLK_d:
+                Camera::instance().moveRight(CAMERA_SPEED);
+                break;
+            case SDLK_w:
+                keyControlsManager->isMovingForward = true;
+                break;
+            case SDLK_s:
+                Camera::instance().moveBackward(CAMERA_SPEED);
+                break;
+            case SDLK_q:
+                Camera::instance().lookUp(CAMERA_SPEED);
+                break;
+            }
+            break;
+        case SDL_KEYUP:
+            switch (e->key.keysym.sym)
+            {
+            case SDLK_w:
+                keyControlsManager->isMovingForward = false;
+                break;
+            }
+            break;
+        }
+    }
 }
