@@ -1,6 +1,7 @@
 #include "SDLGraphicsProgram.h"
 #include "Camera.h"
 #include "maze.h"
+#include "keyControlsManager.h"
 
 #define OBJECTS 4
 
@@ -168,9 +169,6 @@ void SDLGraphicsProgram::render()
 //Loops forever!
 void SDLGraphicsProgram::loop()
 {
-    // Main loop flag
-    bool quit = false;
-
     // Event handler that handles various events in SDL
     // that are related to input and output
     SDL_Event e;
@@ -180,8 +178,10 @@ void SDLGraphicsProgram::loop()
     // Set a default speed for the camera
     float cameraSpeed = 1.0f;
 
+    KeyControlsManager *keyControlsManager = KeyControlsManager::instance();
+
     // While application is running
-    while (!quit)
+    while (!keyControlsManager->shouldQuit)
     {
         //Handle events on queue
         while (SDL_PollEvent(&e) != 0)
@@ -190,7 +190,7 @@ void SDLGraphicsProgram::loop()
             // An example is hitting the "x" in the corner of the window.
             if (e.type == SDL_QUIT)
             {
-                quit = true;
+                keyControlsManager->shouldQuit = true;
             }
 
             // Handle keyboad input for the camera class
@@ -212,7 +212,7 @@ void SDLGraphicsProgram::loop()
                 switch (e.key.keysym.sym)
                 {
                 case SDLK_ESCAPE:
-                    quit = true;
+                    keyControlsManager->shouldQuit = true;
                     break;
                 case SDLK_LEFT:
                     Camera::instance().moveLeft(cameraSpeed);
