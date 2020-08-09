@@ -14,6 +14,8 @@ const float MOUSE_V_THRESHOLD = 0.5;
 const float REGULAR_HEIGHT = 0.5f;
 const float PEEK_HEIGHT = 2.5f;
 
+const int VERTICAL_CHANGE_LIMIT = 5;
+
 Camera &Camera::instance()
 {
     static Camera *instance = new Camera();
@@ -100,10 +102,23 @@ void Camera::moveDown(float speed)
 
 void Camera::togglePeek()
 {
-    float height = REGULAR_HEIGHT;
+    float height;
+
     if ((KeyControlsManager::instance())->isPeekMode)
     {
         height = PEEK_HEIGHT;
+        for (int i = 0; i <= VERTICAL_CHANGE_LIMIT; i += 1)
+        {
+            lookUp(1.0f);
+        }
+    }
+    else
+    {
+        height = REGULAR_HEIGHT;
+        for (int i = 0; i < VERTICAL_CHANGE_LIMIT; i += 1)
+        {
+            lookDown(1.0f);
+        }
     }
     eyePosition[1] = height;
 }
