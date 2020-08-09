@@ -3,10 +3,6 @@
 #include "maze.h"
 #include "keyControlsManager.h"
 
-// Set a default speed for the camera
-const float CAMERA_SPEED = 1.0f;
-const float VERTICAL_CAMERA_SPEED = CAMERA_SPEED * 10.0f;
-
 // Initialization function
 // Returns a true or false value based on successful completion of setup.
 // Takes in dimensions of window.
@@ -249,15 +245,30 @@ void SDLGraphicsProgram::handleKeyInput(SDL_Event *e)
         case SDLK_ESCAPE:
             keyControlsManager->shouldQuit = true;
             break;
-        case SDLK_q:
-            Camera::instance().lookUp(VERTICAL_CAMERA_SPEED);
-            break;
-        case SDLK_e:
-            Camera::instance().lookDown(VERTICAL_CAMERA_SPEED);
-            break;
+
         case SDLK_p:
             keyControlsManager->isPeekMode = !keyControlsManager->isPeekMode;
             Camera::instance().togglePeek();
+            break;
+
+        case SDLK_q:
+            keyControlsManager->isLookingUp = true;
+            break;
+
+        case SDLK_e:
+            keyControlsManager->isLookingDown = true;
+            break;
+        }
+        break;
+    case SDL_KEYUP:
+        switch (e->key.keysym.sym)
+        {
+        case SDLK_q:
+            keyControlsManager->isLookingUp = false;
+            break;
+
+        case SDLK_e:
+            keyControlsManager->isLookingDown = false;
             break;
         }
         break;
@@ -272,39 +283,58 @@ void SDLGraphicsProgram::handleKeyInput(SDL_Event *e)
             switch (e->key.keysym.sym)
             {
             case SDLK_LEFT:
-                Camera::instance().moveLeft(CAMERA_SPEED);
+                keyControlsManager->isMovingLeft = true;
                 break;
             case SDLK_RIGHT:
-                Camera::instance().moveRight(CAMERA_SPEED);
+                keyControlsManager->isMovingRight = true;
                 break;
             case SDLK_UP:
-                Camera::instance().moveForward(CAMERA_SPEED);
+                keyControlsManager->isMovingForward = true;
                 break;
             case SDLK_DOWN:
-                Camera::instance().moveBackward(CAMERA_SPEED);
+                keyControlsManager->isMovingBackward = true;
                 break;
             case SDLK_a:
-                Camera::instance().moveLeft(CAMERA_SPEED);
+                keyControlsManager->isMovingLeft = true;
                 break;
             case SDLK_d:
-                Camera::instance().moveRight(CAMERA_SPEED);
+                keyControlsManager->isMovingRight = true;
                 break;
             case SDLK_w:
                 keyControlsManager->isMovingForward = true;
                 break;
             case SDLK_s:
-                Camera::instance().moveBackward(CAMERA_SPEED);
-                break;
-            case SDLK_q:
-                Camera::instance().lookUp(CAMERA_SPEED);
+                keyControlsManager->isMovingBackward = true;
                 break;
             }
             break;
+
         case SDL_KEYUP:
             switch (e->key.keysym.sym)
             {
+            case SDLK_LEFT:
+                keyControlsManager->isMovingLeft = false;
+                break;
+            case SDLK_RIGHT:
+                keyControlsManager->isMovingRight = false;
+                break;
+            case SDLK_UP:
+                keyControlsManager->isMovingForward = false;
+                break;
+            case SDLK_DOWN:
+                keyControlsManager->isMovingBackward = false;
+                break;
+            case SDLK_a:
+                keyControlsManager->isMovingLeft = false;
+                break;
+            case SDLK_d:
+                keyControlsManager->isMovingRight = false;
+                break;
             case SDLK_w:
                 keyControlsManager->isMovingForward = false;
+                break;
+            case SDLK_s:
+                keyControlsManager->isMovingBackward = false;
                 break;
             }
             break;

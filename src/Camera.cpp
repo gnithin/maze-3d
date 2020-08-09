@@ -6,6 +6,10 @@
 
 #include <iostream>
 
+// Set a default speed for the camera
+const float CAMERA_SPEED = 0.5f;
+const float VERTICAL_CAMERA_SPEED = CAMERA_SPEED * 10.0f;
+
 const float UNIT_MOVEMENT = 0.10;
 const float MOUSE_SENSITIVITY = 1.75f;
 const float MOUSE_H_THRESHOLD = 0.1;
@@ -258,6 +262,31 @@ void Camera::update()
     KeyControlsManager *keyManager = KeyControlsManager::instance();
     if (keyManager->isMovingForward)
     {
-        moveForward(0.5);
+        moveForward(CAMERA_SPEED);
+    }
+
+    if (keyManager->isMovingBackward)
+    {
+        moveBackward(CAMERA_SPEED);
+    }
+
+    if (keyManager->isMovingRight)
+    {
+        moveRight(CAMERA_SPEED);
+    }
+
+    if (keyManager->isMovingLeft)
+    {
+        moveLeft(CAMERA_SPEED);
+    }
+
+    if (keyManager->isLookingUp)
+    {
+        lookUp(VERTICAL_CAMERA_SPEED);
+    }
+
+    if (keyManager->isLookingDown)
+    {
+        lookDown(VERTICAL_CAMERA_SPEED);
     }
 }
