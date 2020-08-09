@@ -12,12 +12,14 @@ public:
 
     bool shouldQuit;
     bool isPeekMode;
+    bool isMovingForward;
 
 private:
     KeyControlsManager()
     {
         shouldQuit = false;
         isPeekMode = false;
+        isMovingForward = false;
     }
 };
 

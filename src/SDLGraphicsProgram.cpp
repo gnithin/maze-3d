@@ -265,13 +265,23 @@ void SDLGraphicsProgram::loop()
                         break;
                     }
                     break;
+                case SDL_KEYUP:
+                    switch (e.key.keysym.sym)
+                    {
+                    case SDLK_w:
+                        keyControlsManager->isMovingForward = false;
+                        break;
+                    }
+                    break;
                 }
             }
 
         } // End SDL_PollEvent loop.
 
         // Update our scene
+        Camera::instance().update();
         update();
+
         // Render using OpenGL
         render();
         //Update screen of our specified window

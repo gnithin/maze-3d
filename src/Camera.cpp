@@ -252,3 +252,12 @@ glm::mat4 Camera::getWorldToViewmatrix() const
                        eyePosition + viewDirection,
                        upVector);
 }
+
+void Camera::update()
+{
+    KeyControlsManager *keyManager = KeyControlsManager::instance();
+    if (keyManager->isMovingForward)
+    {
+        moveForward(0.5);
+    }
+}
