@@ -44,7 +44,7 @@ vec3 calcPointLight(vec3 norm, vec3 diffuseColor, PointLight pointLight);
 void main()
 {
 	// Store the texture coordinates
-	vec3 normal = texture(u_NormalMap, v_texCoord).rgb;        
+	vec3 normal = texture(u_NormalMap, v_texCoord).rgb;
 	normal = normalize(normal * 2.0 - 1.0);  // this normal is in tangent space
 
 	// Store our final texture color

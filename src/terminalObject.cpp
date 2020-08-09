@@ -58,19 +58,17 @@ void TerminalObject::render()
 
 void TerminalObject::update(unsigned int screenWidth, unsigned int screenHeight)
 {
-    std::cout << "Update called" << std::endl;
     MazeGenerator *generator = MazeGenerator::instance();
     int r, c;
     generator->getEndingIndex(&r, &c);
     transform.loadIdentity();
-    transform.translate(c, 0.0f, r);
+    transform.translate(c, 0.0, r);
 
     Bind();
     myShader.setUniform1i("u_DiffuseMap", 0);
 
     projectionMatrix = glm::perspective(45.0f, ((float)screenWidth) / ((float)screenHeight), 0.1f, 20.0f);
     myShader.setUniformMatrix4fv("model", &transform.getInternalMatrix()[0][0]);
-    glm::mat4 viewMatrix = glm::mat4(glm::mat3(Camera::instance().getWorldToViewmatrix()));
-    myShader.setUniformMatrix4fv("view", &viewMatrix[0][0]);
+    myShader.setUniformMatrix4fv("view", &(Camera::instance().getWorldToViewmatrix())[0][0]);
     myShader.setUniformMatrix4fv("projection", &projectionMatrix[0][0]);
 }
