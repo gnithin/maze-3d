@@ -14,6 +14,6 @@ void main()
 {
     vec3 diffuseColor;
 	diffuseColor = texture(u_DiffuseMap, v_texCoord).rgb;
-    FragColor = vec4(diffuseColor, 1.0);
+    FragColor = vec4(1.0, 0.83, 0.60, 1.0);
 }
 // ==================================================================

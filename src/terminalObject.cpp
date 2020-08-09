@@ -62,7 +62,7 @@ void TerminalObject::update(unsigned int screenWidth, unsigned int screenHeight)
     int r, c;
     generator->getEndingIndex(&r, &c);
     transform.loadIdentity();
-    transform.translate(c, 0.0, r);
+    transform.translate(c, 1.0f, r);
 
     Bind();
     myShader.setUniform1i("u_DiffuseMap", 0);
