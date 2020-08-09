@@ -177,6 +177,7 @@ void SDLGraphicsProgram::loop()
 
     // Set a default speed for the camera
     float cameraSpeed = 1.0f;
+    float verticalCameraSpeed = cameraSpeed * 10.0f;
 
     KeyControlsManager *keyControlsManager = KeyControlsManager::instance();
 
@@ -218,10 +219,10 @@ void SDLGraphicsProgram::loop()
                     keyControlsManager->shouldQuit = true;
                     break;
                 case SDLK_q:
-                    Camera::instance().lookUp(cameraSpeed);
+                    Camera::instance().lookUp(verticalCameraSpeed);
                     break;
                 case SDLK_e:
-                    Camera::instance().lookDown(cameraSpeed);
+                    Camera::instance().lookDown(verticalCameraSpeed);
                     break;
                 case SDLK_p:
                     keyControlsManager->isPeekMode = !keyControlsManager->isPeekMode;
