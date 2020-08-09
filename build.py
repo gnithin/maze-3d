@@ -1,6 +1,13 @@
 # Run with: python3 build.py
 import os
 import platform
+import sys
+
+IS_DEBUG_MODE = False
+if len(sys.argv) > 1:
+    for arg in sys.argv[1:]:
+        if arg == "--debug":
+            IS_DEBUG_MODE = True
 
 # (1)==================== COMMON CONFIGURATION OPTIONS ======================= #
 COMPILER="clang++ -std=c++14"   # The compiler we want to use 
@@ -29,6 +36,9 @@ elif platform.system()=="Windows":
     INCLUDE_DIR="-I./include/ -I./thirdparty/old/glm/"
     EXECUTABLE="lab.exe"
     LIBRARIES="-lmingw32 -lSDL2main -lSDL2 -mwindows"
+
+if IS_DEBUG_MODE:
+    ARGUMENTS += " -D MAZE_DEBUG_MODE"
 # (2)=================== Platform specific configuration ===================== #
 
 # (3)====================== Building the Executable ========================== #

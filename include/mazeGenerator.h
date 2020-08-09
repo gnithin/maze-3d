@@ -43,6 +43,7 @@ private:
         // Prevent anyone from calling this
     };
 
+#ifdef MAZE_DEBUG_MODE
     // NOTE: MazePoint(up, down, left, right)
     std::vector<std::vector<MazePoint>>
         mazeMatrix{
@@ -52,6 +53,25 @@ private:
             {MazePoint(1, 0, 0, 0), MazePoint(0, 0, 1, 0), MazePoint(1, 0, 0, 0), MazePoint(1, 0, 0, 0), MazePoint(1, 0, 0, 0)},
             {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 1, 0), MazePoint(1, 0, 1, 0), MazePoint(1, 0, -1, 0), MazePoint(1, 0, 1, 0)},
         };
+
+#else
+    // NOTE: MazePoint(up, down, left, right)
+    std::vector<std::vector<MazePoint>>
+        mazeMatrix{
+            //          1                       2                       3                   4                       5                           6                  7                    8                      9                    10
+            {MazePoint(0, 0, 0, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 1, 1, 0)},
+            {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 1), MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 1, 0, 0)},
+            {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(1, 0, 0, 0), MazePoint(1, 0, 0, 0), MazePoint(0, 1, 0, 0)},
+            {MazePoint(1, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(1, 0, 0, 0), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(1, 0, 0, 0), MazePoint(0, 1, 0, 0)},
+            {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(1, 0, 0, 0), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(1, 0, 0, 0), MazePoint(0, 0, 0, 1), MazePoint(1, 0, 0, 0), MazePoint(0, 1, 0, 0)},
+            {MazePoint(1, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(1, 0, 0, 0), MazePoint(1, 0, 0, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 1, 0, 0)},
+            {MazePoint(1, 0, 0, 0), MazePoint(1, 0, 0, 0), MazePoint(1, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 1, 1, 0)},
+            {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(1, 0, 0, 0), MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 1, 1, 0)},
+            {MazePoint(1, 0, 0, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 0, 0), MazePoint(1, 0, 1, 0), MazePoint(0, 0, 0, 0), MazePoint(0, 0, 1, 1), MazePoint(0, 0, 0, 1), MazePoint(0, 0, 0, 0), MazePoint(0, 1, 0, 0)},
+            {MazePoint(1, 0, 0, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(-1, 0, 0, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(1, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0), MazePoint(0, 0, 1, 0)},
+        };
+
+#endif
 };
 
 #endif
