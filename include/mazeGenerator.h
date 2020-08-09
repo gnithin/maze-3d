@@ -45,18 +45,29 @@ public:
         *c = mazeMatrix.size() - 1;
     }
 
-    bool isEndingIndex(int r, int c)
+    void getEndingIndex(int *r, int *c)
     {
-        int matrixSize = mazeMatrix.size();
-        if (r >= matrixSize || c >= matrixSize || r < 0 || c < 0)
+        // Starting maze point is the maze-point which contains -1 for any entry
+        for (int i = 0; i < mazeMatrix.size(); i++)
         {
-            return false;
+            for (int j = 0; j < mazeMatrix.size(); j++)
+            {
+                MazePoint curr = mazeMatrix[i][j];
+                if (
+                    curr.up == ENDING_NODE_MARKER ||
+                    curr.down == ENDING_NODE_MARKER ||
+                    curr.left == ENDING_NODE_MARKER ||
+                    curr.right == ENDING_NODE_MARKER)
+                {
+                    *r = i;
+                    *c = j;
+                    return;
+                }
+            }
         }
-        MazePoint curr = mazeMatrix[r][c];
-        return (curr.up == ENDING_NODE_MARKER ||
-                curr.down == ENDING_NODE_MARKER ||
-                curr.left == ENDING_NODE_MARKER ||
-                curr.right == ENDING_NODE_MARKER);
+
+        *r = mazeMatrix.size() - 1;
+        *c = mazeMatrix.size() - 1;
     }
 
 private:

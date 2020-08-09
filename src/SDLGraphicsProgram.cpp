@@ -100,7 +100,7 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h) : screenWidth(w), screenHei
     skyCubeObject = new SkyCubeObject();
     skyCubeObject->LoadTextures(faceFileNames);
 
-    terminalObject = new Object();
+    terminalObject = new TerminalObject();
     terminalObject->LoadTexture("resources/container.ppm");
 }
 
