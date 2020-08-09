@@ -14,7 +14,7 @@ const float MOUSE_V_THRESHOLD = 0.5;
 const float REGULAR_HEIGHT = 0.5f;
 const float PEEK_HEIGHT = 2.5f;
 
-const int VERTICAL_CHANGE_LIMIT = 5;
+const int VERTICAL_CHANGE_LIMIT = 15;
 
 Camera &Camera::instance()
 {
