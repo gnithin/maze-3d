@@ -90,8 +90,6 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h) : screenWidth(w), screenHei
     // Setup the maze
     maze = Maze::instance();
 
-    skyCubeObject = new SkyCubeObject();
-
     std::vector<std::string> faceFileNames = {
         "resources/skycube/right.jpg",
         "resources/skycube/left.jpg",
@@ -99,7 +97,11 @@ SDLGraphicsProgram::SDLGraphicsProgram(int w, int h) : screenWidth(w), screenHei
         "resources/skycube/bottom.jpg",
         "resources/skycube/back.jpg",
         "resources/skycube/front.jpg"};
+    skyCubeObject = new SkyCubeObject();
     skyCubeObject->LoadTextures(faceFileNames);
+
+    terminalObject = new Object();
+    terminalObject->LoadTexture("resources/container.ppm");
 }
 
 // Proper shutdown of SDL and destroy initialized objects
@@ -128,6 +130,7 @@ void SDLGraphicsProgram::update()
 {
     maze->update(screenWidth, screenHeight);
     skyCubeObject->update(screenWidth, screenHeight);
+    terminalObject->update(screenWidth, screenHeight);
 }
 
 // Render
@@ -155,6 +158,7 @@ void SDLGraphicsProgram::render()
     // Reference - https://stackoverflow.com/a/2859795/1518924
     skyCubeObject->render();
     maze->render();
+    terminalObject->render();
 
     // Delay to slow things down just a bit!
     SDL_Delay(25);

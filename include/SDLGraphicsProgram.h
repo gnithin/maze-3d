@@ -78,6 +78,7 @@ private:
     Maze *maze;
     // Sky cube;
     SkyCubeObject *skyCubeObject;
+    Object *terminalObject;
 };
 
 #endif
