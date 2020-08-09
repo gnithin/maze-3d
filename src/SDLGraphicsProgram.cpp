@@ -186,6 +186,7 @@ void SDLGraphicsProgram::loop()
         //Handle events on queue
         while (SDL_PollEvent(&e) != 0)
         {
+            bool isPeekMode = keyControlsManager->isPeekMode;
             // User posts an event to quit
             // An example is hitting the "x" in the corner of the window.
             if (e.type == SDL_QUIT)
@@ -205,6 +206,8 @@ void SDLGraphicsProgram::loop()
 
                 Camera::instance().mouseLook(mouseX, mouseY, mouseX_rel, mouseY_rel);
             }
+
+            // Common keyboard events
             switch (e.type)
             {
             // Handle keyboard presses
@@ -214,39 +217,60 @@ void SDLGraphicsProgram::loop()
                 case SDLK_ESCAPE:
                     keyControlsManager->shouldQuit = true;
                     break;
-                case SDLK_LEFT:
-                    Camera::instance().moveLeft(cameraSpeed);
-                    break;
-                case SDLK_RIGHT:
-                    Camera::instance().moveRight(cameraSpeed);
-                    break;
-                case SDLK_UP:
-                    Camera::instance().moveForward(cameraSpeed);
-                    break;
-                case SDLK_DOWN:
-                    Camera::instance().moveBackward(cameraSpeed);
-                    break;
-                case SDLK_a:
-                    Camera::instance().moveLeft(cameraSpeed);
-                    break;
-                case SDLK_d:
-                    Camera::instance().moveRight(cameraSpeed);
-                    break;
-                case SDLK_w:
-                    Camera::instance().moveForward(cameraSpeed);
-                    break;
-                case SDLK_s:
-                    Camera::instance().moveBackward(cameraSpeed);
-                    break;
                 case SDLK_q:
                     Camera::instance().lookUp(cameraSpeed);
                     break;
                 case SDLK_e:
                     Camera::instance().lookDown(cameraSpeed);
                     break;
+                case SDLK_p:
+                    std::cout << "Peeking!" << std::endl;
+                    keyControlsManager->isPeekMode = !keyControlsManager->isPeekMode;
+                    break;
                 }
                 break;
             }
+
+            if (!isPeekMode)
+            {
+                switch (e.type)
+                {
+                // Handle keyboard presses
+                case SDL_KEYDOWN:
+                    switch (e.key.keysym.sym)
+                    {
+                    case SDLK_LEFT:
+                        Camera::instance().moveLeft(cameraSpeed);
+                        break;
+                    case SDLK_RIGHT:
+                        Camera::instance().moveRight(cameraSpeed);
+                        break;
+                    case SDLK_UP:
+                        Camera::instance().moveForward(cameraSpeed);
+                        break;
+                    case SDLK_DOWN:
+                        Camera::instance().moveBackward(cameraSpeed);
+                        break;
+                    case SDLK_a:
+                        Camera::instance().moveLeft(cameraSpeed);
+                        break;
+                    case SDLK_d:
+                        Camera::instance().moveRight(cameraSpeed);
+                        break;
+                    case SDLK_w:
+                        Camera::instance().moveForward(cameraSpeed);
+                        break;
+                    case SDLK_s:
+                        Camera::instance().moveBackward(cameraSpeed);
+                        break;
+                    case SDLK_q:
+                        Camera::instance().lookUp(cameraSpeed);
+                        break;
+                    }
+                    break;
+                }
+            }
+
         } // End SDL_PollEvent loop.
 
         // Update our scene
