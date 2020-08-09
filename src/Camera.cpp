@@ -8,9 +8,9 @@
 
 // Set a default speed for the camera
 const float CAMERA_SPEED = 0.5f;
-const float VERTICAL_CAMERA_SPEED = CAMERA_SPEED * 10.0f;
+const float VERTICAL_CAMERA_SPEED = CAMERA_SPEED * 7.0f;
 
-const float UNIT_MOVEMENT = 0.10;
+const float UNIT_MOVEMENT = 0.075f;
 const float MOUSE_SENSITIVITY = 1.75f;
 const float MOUSE_H_THRESHOLD = 0.1;
 const float MOUSE_V_THRESHOLD = 0.5;
