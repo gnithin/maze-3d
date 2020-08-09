@@ -32,11 +32,11 @@ void TerminalObject::init()
     geometry.gen();
 
     // Create a buffer and set the stride of information
-    myBuffer.CreateBufferTextureLayout(14,
-                                       geometry.getSize(),
-                                       geometry.getIndicesSize(),
-                                       geometry.getData(),
-                                       geometry.getIndicesData());
+    myBuffer.CreateBufferNormalMapLayout(14,
+                                         geometry.getSize(),
+                                         geometry.getIndicesSize(),
+                                         geometry.getData(),
+                                         geometry.getIndicesData());
 
     // Setup shaders
     std::string vertexShader = myShader.LoadShader("./shaders/terminal/vert.glsl");
