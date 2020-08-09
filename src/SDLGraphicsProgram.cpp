@@ -247,7 +247,7 @@ void SDLGraphicsProgram::handleKeyInput(SDL_Event *e)
             break;
 
         case SDLK_p:
-            keyControlsManager->isPeekMode = !keyControlsManager->isPeekMode;
+            keyControlsManager->togglePeek();
             Camera::instance().togglePeek();
             break;
 
