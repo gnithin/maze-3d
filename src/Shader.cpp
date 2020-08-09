@@ -161,11 +161,6 @@ bool Shader::CheckLinkStatus(GLuint programID)
     // Reclaim our memory
     Log("Linker Error", "Error in linking process");
     Log("Linker error(s)", (const char *)errorMessages);
-    // TODO: We can get even more fine grained information from our shader
-    // As an example:
-    // GLint position = glGetAttribLocation(id,"position");
-    // The above would return the 'layout' information
-    // from our shader which can be helpful for debugging.
 
     delete[] errorMessages;
     return false;

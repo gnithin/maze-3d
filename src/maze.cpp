@@ -36,13 +36,12 @@ Maze::Maze()
     for (int i = 0; i < numWalls; ++i)
     {
         Object *wall = new Object;
-        //wall->LoadTexture("brick.ppm");
-        wall->LoadTexture("brick.ppm", "normal.ppm");
+        wall->LoadTexture("resources/brick.ppm", "resources/normal.ppm");
         objects.push_back(wall);
     }
     // One more object for the floor
     Object *floor = new Object;
-    floor->LoadTexture("container.ppm");
+    floor->LoadTexture("resources/container.ppm");
     objects.push_back(floor);
 }
 

@@ -45,8 +45,6 @@ void Buffer::CreateBufferLayout(unsigned int stride, unsigned int vcount, unsign
     glBindVertexArray(m_VAOId);
 
     // Vertex Buffer Object (VBO)
-    // Create a buffer (note we’ll see this pattern of code often in OpenGL)
-    // TODO: Read this and understand what is going on
     glGenBuffers(1, &m_vertexPositionBuffer); // selecting the buffer is
                                               // done by binding in OpenGL
                                               // We tell OpenGL then how we want to
@@ -95,8 +93,6 @@ void Buffer::CreateBufferLayout(unsigned int stride, unsigned int vcount, unsign
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * m_stride, (char *)(sizeof(float) * 3));
 
     // Another Vertex Buffer Object (VBO)
-    // This time for your index buffer.
-    // TODO: put these static_asserts somewhere
     static_assert(sizeof(unsigned int) == sizeof(GLuint), "Gluint not same size!");
 
     glGenBuffers(1, &m_indexBufferObject);
@@ -124,8 +120,6 @@ void Buffer::CreateBufferNormalMapLayout(unsigned int stride, unsigned int vcoun
     glBindVertexArray(m_VAOId);
 
     // Vertex Buffer Object (VBO)
-    // Create a buffer (note we’ll see this pattern of code often in OpenGL)
-    // TODO: Read this and understand what is going on
     glGenBuffers(1, &m_vertexPositionBuffer); // selecting the buffer is
                                               // done by binding in OpenGL
                                               // We tell OpenGL then how we want to
@@ -185,7 +179,6 @@ void Buffer::CreateBufferNormalMapLayout(unsigned int stride, unsigned int vcoun
 
     // Another Vertex Buffer Object (VBO)
     // This time for your index buffer.
-    // TODO: put these static_asserts somewhere
     static_assert(sizeof(unsigned int) == sizeof(GLuint), "Gluint not same size!");
 
     // Setup an index buffer
@@ -207,8 +200,6 @@ void Buffer::CreateBufferTextureLayout(unsigned int stride, unsigned int vcount,
     glBindVertexArray(m_VAOId);
 
     // Vertex Buffer Object (VBO)
-    // Create a buffer (note we’ll see this pattern of code often in OpenGL)
-    // TODO: Read this and understand what is going on
     glGenBuffers(1, &m_vertexPositionBuffer); // selecting the buffer is
                                               // done by binding in OpenGL
                                               // We tell OpenGL then how we want to
@@ -260,7 +251,6 @@ void Buffer::CreateBufferTextureLayout(unsigned int stride, unsigned int vcount,
 
     // Another Vertex Buffer Object (VBO)
     // This time for your index buffer.
-    // TODO: put these static_asserts somewhere
     static_assert(sizeof(unsigned int) == sizeof(GLuint), "Gluint not same size!");
 
     glGenBuffers(1, &m_indexBufferObject);
