@@ -23,7 +23,7 @@ Image::~Image()
 
 // Little function for loading the pixel data
 // from a PPM image.
-// TODO: Expects a very specific version of PPM!
+// NOTE: Expects a very specific version of PPM!
 //
 // flip - Will flip the pixels upside down in the data
 //        If you use this be consistent.
@@ -118,7 +118,6 @@ void Image::loadPPM(bool flip)
             else if (iteration == 2)
             {
                 // max color range is stored here
-                // TODO: Can be stored optionally
             }
             else
             {

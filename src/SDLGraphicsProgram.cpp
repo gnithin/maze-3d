@@ -138,16 +138,12 @@ void SDLGraphicsProgram::render()
 {
     // Initialize clear color
     // Setup our OpenGL State machine
-    // TODO: Read this
-    // The below command is new!
-    // What we are doing, is telling opengl to create a depth(or Z-buffer)
-    // for us that is stored every frame.
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
     // This is the background of the screen.
     glViewport(0, 0, screenWidth, screenHeight);
     glClearColor(0.2f, 0.2f, 0.2f, 1.f);
-    // TODO: Read this
+
     // Clear color buffer and Depth Buffer
     // Remember that the 'depth buffer' is our
     // z-buffer that figures out how far away items are every frame

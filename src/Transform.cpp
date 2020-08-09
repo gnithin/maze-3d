@@ -78,7 +78,6 @@ Transform &Transform::operator=(const Transform &t)
     return *this;
 }
 
-// TODO: Do some more testing here!
 // This code probably needs optimized (lots of new objects on the stack!)
 Transform operator*(const Transform &lhs, const Transform &rhs)
 {
@@ -89,7 +88,6 @@ Transform operator*(const Transform &lhs, const Transform &rhs)
     return result;
 }
 
-// TODO: Do some more testing here!
 // This code probably needs optimized (lots of new objects on the stack!)
 Transform operator+(const Transform &lhs, const Transform &rhs)
 {

@@ -48,9 +48,6 @@ Object::~Object()
 {
 }
 
-// TODO: In the future it may be good to
-// think about loading a 'default' texture
-// if the user forgets to do this action!
 void Object::LoadTexture(std::string fileName)
 {
     // Load our actual textures

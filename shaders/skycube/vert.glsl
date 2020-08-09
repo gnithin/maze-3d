@@ -4,7 +4,6 @@
 // We explicitly state which is the vertex information
 // (The first 3 floats are positional data, we are putting in our vector)
 layout(location=0)in vec3 position; 
-// TODO: Use this
 layout(location=1)in vec2 texCoord;
 
 // If we are applying our camera, then we need to add some uniforms.
