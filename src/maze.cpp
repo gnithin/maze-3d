@@ -45,11 +45,6 @@ Maze::Maze()
     objects.push_back(floor);
 }
 
-std::vector<Object *> Maze::getMazeObjects()
-{
-    return objects;
-}
-
 Maze::~Maze()
 {
     for (int i = 0; i < numWalls; ++i)
