@@ -2,13 +2,13 @@
 
 ## Screenshots.
 The maze overview from the starting point - 
-![](screenshot/maze-overview.png)
+![](./screenshots/maze-overview.png)
 
 When the program starts
-![](screenshot/starting-point.png)
+![](./screenshots/starting-point.png)
 
 When the program ends
-![](screenshot/ending-point.png)
+![](./screenshots/ending-point.png)
 
 * Name and partners name(At most teams of 2 folks total)
   * Team member 1: Nithin Gangadharan
