@@ -60,7 +60,6 @@ void Camera::moveOnXZ(float newPositionX, float newPositionZ)
 
 void Camera::moveForward(float speed)
 {
-    //float newPosition = eyePosition[2] - UNIT_MOVEMENT;
     float newPositionX = eyePosition[0] + speed * UNIT_MOVEMENT * cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     float newPositionZ = eyePosition[2] + speed * UNIT_MOVEMENT * sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
@@ -69,7 +68,6 @@ void Camera::moveForward(float speed)
 
 void Camera::moveBackward(float speed)
 {
-    //float newPosition = eyePosition[2] + UNIT_MOVEMENT;
     float newPositionX = eyePosition[0] - speed * UNIT_MOVEMENT * cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     float newPositionZ = eyePosition[2] - speed * UNIT_MOVEMENT * sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 

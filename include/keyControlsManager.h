@@ -10,6 +10,20 @@ public:
         return obj;
     }
 
+    void togglePeek()
+    {
+        // Disable every movement
+        isMovingForward = false;
+        isMovingBackward = false;
+        isMovingLeft = false;
+        isMovingRight = false;
+
+        isLookingUp = false;
+        isLookingDown = false;
+
+        isPeekMode = !isPeekMode;
+    }
+
     bool shouldQuit;
     bool isPeekMode;
 

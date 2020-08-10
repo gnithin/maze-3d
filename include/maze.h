@@ -21,7 +21,6 @@ public:
         return mazeInstance;
     }
 
-    std::vector<Object *> getMazeObjects();
     void update(int screenWidth, int screenHeight);
     void render();
     void getStartingIndex(int *r, int *c);

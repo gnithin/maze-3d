@@ -38,6 +38,7 @@
 #include "Object.h"
 #include "maze.h"
 #include "skyCubeObject.h"
+#include "terminalObject.h"
 
 // Purpose:
 // This class sets up a full graphics program using SDL
@@ -78,6 +79,7 @@ private:
     Maze *maze;
     // Sky cube;
     SkyCubeObject *skyCubeObject;
+    TerminalObject *terminalObject;
 };
 
 #endif
