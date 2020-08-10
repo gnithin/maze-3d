@@ -82,8 +82,8 @@ void TerminalObject::update(unsigned int screenWidth, unsigned int screenHeight)
     {
         prevTick = ticks;
 
-        float diff = sin(counter) * 0.10;
-        counter = (counter + 0.1f);
+        float diff = sin(counter) * 0.15;
+        counter = (counter + 0.2f);
         if (counter > (2 * PI))
         {
             counter = 0.0f;
