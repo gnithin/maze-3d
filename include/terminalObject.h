@@ -11,6 +11,11 @@ public:
     void init();
     void render();
     void update(unsigned int screenWidth, unsigned int screenHeight);
+
+private:
+    float oldYPosition;
+    float prevTick;
+    float counter;
 };
 
 #endif

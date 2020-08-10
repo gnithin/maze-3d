@@ -1,7 +1,15 @@
+#if defined(LINUX) || defined(MINGW)
+#include <SDL2/SDL.h>
+#else // This works for Mac
+#include <SDL.h>
+#endif
+
 #include "terminalObject.h"
 #include "Geometry.h"
 #include "Camera.h"
 #include "mazeGenerator.h"
+
+#define PI 3.14159265
 
 TerminalObject::TerminalObject() : Object(10)
 {
@@ -12,6 +20,8 @@ void TerminalObject::init()
 {
     float width = 0.4f;
     float height = 0.3f;
+    oldYPosition = 1.0f;
+
     // Setup geometry
     // Be careful not to forget comma's after each line
     // (except the last line of course)!
@@ -22,7 +32,7 @@ void TerminalObject::init()
     geometry.addTexture(1.0f, 0.0f);                      // Texture
 
     geometry.addVertex(0.5f - (width / 2), height, 0.0f); // Position and Normal
-    geometry.addTexture(1.0f, 1.0f);                      // Texture
+    geometry.addTexture(0.0f, 1.0f);                      // Texture
 
     // Make our triangles and populate our
     // indices data structure
@@ -61,7 +71,27 @@ void TerminalObject::update(unsigned int screenWidth, unsigned int screenHeight)
     int r, c;
     generator->getEndingIndex(&r, &c);
     transform.loadIdentity();
-    transform.translate(c, 1.0f, r);
+
+    // Make the pointer oscillate!
+    int ticks = SDL_GetTicks();
+    if (prevTick == 0.0f)
+    {
+        prevTick = ticks;
+    }
+    if (ticks - prevTick > 50.0f)
+    {
+        prevTick = ticks;
+
+        float diff = sin(counter) * 0.10;
+        counter = (counter + 0.1f);
+        if (counter > (2 * PI))
+        {
+            counter = 0.0f;
+        }
+        oldYPosition = 1.0f + diff;
+    }
+
+    transform.translate(c, oldYPosition, r);
 
     Bind();
     myShader.setUniform1i("u_DiffuseMap", 0);
