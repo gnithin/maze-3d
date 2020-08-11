@@ -62,3 +62,13 @@ When the program ends
     </tr>
   </tbody>
 </table>
+
+
+### Project features
+
+- Aim of our project was to create a 3-D maze (like the old game Wolfenstein-3D (1992))
+- Maze representation of walls
+- Smoothing movements
+- Collision detection (Bounding-box)
+- Sky-cube
+- An animated finish point indicator
