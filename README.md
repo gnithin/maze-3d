@@ -1,7 +1,7 @@
 ## Video link
 https://www.youtube.com/watch?v=nXODF0Ps1uM
 
-## Screenshots.
+## Screenshots
 
 When the game starts - 
 
