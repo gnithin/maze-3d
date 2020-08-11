@@ -1,13 +1,18 @@
-## Edit this line: Put your link to your youtube video here (see deliverables).
+## Video link
+https://www.youtube.com/watch?v=nXODF0Ps1uM
 
 ## Screenshots.
-The maze overview from the starting point - 
-![](./screenshots/maze-overview.png)
 
-When the program starts
+When the game starts - 
+
 ![](./screenshots/starting-point.png)
 
-When the program ends
+The entire maze in the "Peek view" -
+
+![](./screenshots/maze-overview.png)
+
+At the finish line -
+
 ![](./screenshots/ending-point.png)
 
 * Name and partners name(At most teams of 2 folks total)
@@ -40,6 +45,27 @@ When the program ends
       * Add Sliding collision - Right now, when brushing against the wall, the camera stops. Using sliding collision would avoid that.
       * Adding a sound whenever the camera moves
 
+### Project features
+- Aim of our project was to create a 3-D maze, much like the old game Wolfenstein-3D (1992)
+- Maze representation of walls
+- Collision detection (Bounding-box)
+- Sky-cube
+- Smoothing movements
+- Normals implementation on walls
+- Lighting
+- Animated finish point indicator
+
+### Keyboard/Mouse controls
+- You can turn around horizontally using the mouse.
+- `w` or `↑` - Move Forward
+- `s` or `↓` - Move back
+- `a` or `←` - Move left
+- `d` or `→` - Move right
+- `q` - Look up
+- `e` - Look down
+- `p` - Peek view - Camera is hoisting above the maze. You can still turn around, but moving forward or backward is disabled.
+- `esc` - Quit the game
+
 ### Rubric
 
 <table>
@@ -62,13 +88,3 @@ When the program ends
     </tr>
   </tbody>
 </table>
-
-
-### Project features
-
-- Aim of our project was to create a 3-D maze (like the old game Wolfenstein-3D (1992))
-- Maze representation of walls
-- Smoothing movements
-- Collision detection (Bounding-box)
-- Sky-cube
-- An animated finish point indicator
